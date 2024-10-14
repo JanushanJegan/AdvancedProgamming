@@ -1,0 +1,10 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="GUI.Views.MainWindow"
+        Width="500" Height="300" Title="Maths Interpreter">
+    <StackPanel Margin="10">
+        <TextBox Name="InputExpression" Watermark="Enter Mathematical Expression:" />
+        <Button Content="Evaluate" Click="CalculateOnClick" Margin="0,10,0,10"/>
+        <TextBox Name="OutputResult" IsReadOnly="True" Watermark="Result" />
+    </StackPanel>
+</Window>
