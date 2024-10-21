@@ -11,14 +11,17 @@ exception ParserError
 exception VarUndefined of string
 
 let mutable varMap = Map.empty<string, Value>
-let getMap() = Map.empty<string, Value>
+let mutable funcMap = Map.empty<string, string * terminal list>
+
+let initVarMap() = Map.empty<string, Value>
+let initFuncMap() = Map.empty<string, string * terminal list>
 let strToList s = [for c in s -> c]
 let isBlank c = Char.IsWhiteSpace c
 let isDigit c = Char.IsDigit c
 let isLetter c = Char.IsLetter c
 let intVal c = int(Char.GetNumericValue c)
 
-let rec scanInt(input, n) = 
+let rec scanInt(input, n) =
     match input with
     | c::tail when isDigit c -> scanInt(tail, 10*n+(intVal c))
     | _ -> (input, n)
@@ -31,9 +34,9 @@ and scanStr(input, varName) =
     match input with
     | c::tail when isLetter c || isDigit c -> scanStr(tail, varName + string c)
     | _ -> (input, varName)
-  
 
-let lexer input = 
+
+let lexer input =
     let rec scan input =
         match input with
         | [] -> []
@@ -48,31 +51,36 @@ let lexer input =
         | '='::tail -> Eql :: scan tail
         | c :: tail when isBlank c -> scan tail
         | c :: tail when isLetter c -> let remInput, varName = scanStr(tail, string c)
-                                       Var varName :: scan remInput        
+                                       Var varName :: scan remInput
         | c :: tail when isDigit c -> let remInput, n = scanInt(tail, intVal c)
                                       match remInput with
                                       | '.'::tail -> let remInput, decimal = scanFloat(tail, 0., 1.)
                                                      Num(Float(decimal+float n)) :: scan remInput
-                                      | _ -> Num(Int n) :: scan remInput 
+                                      | _ -> Num(Int n) :: scan remInput
         | _ -> raise (LexerError(List.head input))
     scan (strToList input)
 
 // Grammar in BNF:
-// <S>        ::= <Var> "=" <E> | <E>
+// <S>        ::= <Var> "=" <E> | <Var> "(" <Var> ")" "=" <E> | <E>
 // <E>        ::= <T> <EOpt>
 // <EOpt>     ::= "+" <T> <EOpt> | "-" <T> <EOpt> | <empty>
 // <T>        ::= <F> <TOpt>
 // <TOpt>     ::= "*" <F> <TOpt> | "/" <F> <TOpt> | <empty>
 // <F>        ::== <NR> <FOpt>
 // <FOpt>     ::= "^" <F> <FOpt> | <empty>
-// <NR>       ::= <Num> | "-"<Num> | "-"<Var> | <Var> | "(" <E> ")"
+// <NR>       ::= <Num> | "-"<Num> | "-"<Var> | <Var> | <Var> "(" <Var>|<Num> ")" | "(" <E> ")"
 let parser tList =
     let rec S tList =
         match tList with
         | Var _ :: Eql :: tail -> E tail
+        | Var _ :: Lbr :: Var v :: Rbr :: Eql :: tail ->
+            varMap <- Map.add v (Int 0) varMap // temp add func var to map so expression will parse without VarUndefined
+            let tList = E tail
+            varMap <- Map.remove v varMap
+            tList
         | _ -> E tList
     and E tList = (T >> EOpt) tList
-    and EOpt tList = 
+    and EOpt tList =
         match tList with
         | Add :: tail | Sub :: tail | Mod :: tail -> (T >> EOpt) tail
         | _ -> tList
@@ -87,21 +95,23 @@ let parser tList =
         | Pow :: tail -> (F >> FOpt) tail
         | _ -> tList
     and NR tList =
-        match tList with 
+        match tList with
         | Num _ :: tail | Sub :: Num _ :: tail -> tail
         // | Var v :: tail -> match Map.tryFind v varMap with Some _ -> tail | None -> raise (VarUndefined(v))
         // | Var v :: tail -> match varMap.ContainsKey(v) with true -> tail | false -> raise (VarUndefined(v))
+        | Var v :: Lbr :: n :: Rbr ::  tail -> NR [n] |> ignore; if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))
         | Var v :: tail | Sub :: Var v :: tail -> if varMap.ContainsKey(v) then tail else raise (VarUndefined(v))
         // | Var v :: tail when varMap.ContainsKey(v) -> tail
         // | Var v :: _ -> raise (VarUndefined(v))
         | Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
+        // | Lbr :: e :: Rbr :: tail -> E [e] |> ignore; tail
         | _ -> raise ParserError
     S tList
 
 let toFloat = function | Int v -> float v | Float v -> v
 let add a b = match a, b with | Int a, Int b -> Int(a + b) | _ -> Float(toFloat a + toFloat b)
 let sub a b = match a, b with | Int a, Int b -> Int(a - b) | _ -> Float(toFloat a - toFloat b)
-let mul a b = match a, b with | Int a, Int b -> Int(a * b) | _ -> Float(toFloat a * toFloat b) 
+let mul a b = match a, b with | Int a, Int b -> Int(a * b) | _ -> Float(toFloat a * toFloat b)
 let div a b = match a, b with | Int a, Int b when b <> 0 -> Int(a / b) | _ -> Float(toFloat a / toFloat b)
 let pow a b = match a, b with | Int a, Int b -> Int(pown a b)  | _ -> Float(toFloat a ** toFloat b)
 
@@ -109,15 +119,18 @@ let modulus a b = match a, b with | Int a, Int b -> Int(a % b) | _ -> Float(toFl
 
 
 let parseAndEval tList =
-    let rec S tList = 
+    let rec S tList =
         match tList with
-        | Var varName :: Eql :: tail -> 
+        | Var varName :: Eql :: tail ->
             let tList, value = E tail
             varMap <- Map.add varName value varMap
             (tList, value)
+        | Var funcName :: Lbr :: Var n :: Rbr :: Eql :: tail ->
+            funcMap <- Map.add funcName (n,tail) funcMap
+            (tList, Int 0)
         | _ -> E tList
     and E tList = (T >> EOpt) tList
-    and EOpt (tList, value) = 
+    and EOpt (tList, value) =
         match tList with
         // | Add :: tail -> EOpt (T tail ||> fun tLst tVal -> (tLst, add value tVal))
         | Add :: tail -> let tLst, tVal = T tail
@@ -142,35 +155,48 @@ let parseAndEval tList =
                          FOpt (tLst, pow value tVal)
         | _ -> (tList, value)
     and NR tList =
-        match tList with 
+        match tList with
         | Num value :: tail -> (tail, value)
         | Sub :: Num value :: tail -> (tail, sub (Int 0) value)
+        | Var funcName :: Lbr :: Num n :: Rbr ::  tail ->
+            let argName, func = Map.find funcName funcMap
+            varMap <- Map.add argName n varMap
+            let _,value = E func
+            varMap <- Map.remove argName varMap
+            (tail, value)
         | Var varName :: tail -> (tail, Map.find varName varMap)
         | Sub :: Var varName :: tail -> (tail, sub (Int 0) (Map.find varName varMap))
         | Lbr :: tail -> let tLst, value = E tail
-                         match tLst with 
+                         match tLst with
                           | Rbr :: tail -> (tail, value)
                           | _ -> raise ParserError
         | _ -> raise ParserError
     S tList
-    
-let rec printTokenList (lst:list<terminal>) : list<string> = 
+
+let rec printTokenList (lst:list<terminal>) : list<string> =
     match lst with
     | head::tail -> printf $"{head.ToString()} "; printTokenList tail
     | [] -> printfn "EOL"; []
-            
 
-let main (input:string, vM)  =
-    varMap <- vM
+let main (input:string, vM, fM)  =
+    varMap <- vM; funcMap <- fM
     try
         let tokenList = lexer input
         printTokenList tokenList |> ignore
         parser tokenList |> ignore
         let _, result = parseAndEval tokenList
-        ($"Result = {result}", varMap)
+        $"Result = {result}", varMap, funcMap
     with
-        | LexerError(c) -> $"Lexer Error, invalid token {c}", varMap
-        | ParserError -> "Error parsing", varMap
-        | VarUndefined(v) -> $"Variable {v} is not defined", varMap
-        | :? OverflowException -> "Overflow error, exceeded max value for int32", varMap
-        
+        | LexerError(c) -> $"Lexer Error, invalid token {c}", varMap, funcMap
+        | ParserError -> "Error parsing", varMap, funcMap
+        | VarUndefined(v) -> $"Variable {v} is not defined", varMap, funcMap
+        | :? OverflowException -> "Overflow error, exceeded max value for int32", varMap, funcMap
+
+let plot (input:string, vM, fM)  =
+    varMap <- vM; funcMap <- fM
+    let tokenList = lexer input
+    match tokenList with
+        | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
+            ( [for i in -10..10 -> (float i, toFloat(snd(parseAndEval([Var fn; Lbr; Num(Float(i)); Rbr]))))], varMap, funcMap)
+        | _ -> ([], varMap, funcMap)
+
