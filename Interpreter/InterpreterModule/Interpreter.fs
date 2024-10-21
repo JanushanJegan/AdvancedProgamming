@@ -4,7 +4,7 @@ open System
 open Microsoft.FSharp.Core.Operators.Checked
 
 type Value = | Int of int | Float of float
-and terminal = Add | Sub | Mul | Div | Pow | Mod |  Lbr | Rbr | Eql | Num of Value | Var of string
+and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Num of Value | Var of string
 
 exception LexerError of char
 exception ParserError
@@ -63,20 +63,22 @@ let lexer input =
 // Grammar in BNF:
 // <S>        ::= <Var> "=" <E> | <Var> "(" <Var> ")" "=" <E> | <E>
 // <E>        ::= <T> <EOpt>
-// <EOpt>     ::= "+" <T> <EOpt> | "-" <T> <EOpt> | <empty>
+// <EOpt>     ::= "+" <T> <EOpt> | "-" <T> <EOpt> | "%" <T> <EOpt> | <empty>
 // <T>        ::= <F> <TOpt>
 // <TOpt>     ::= "*" <F> <TOpt> | "/" <F> <TOpt> | <empty>
 // <F>        ::== <NR> <FOpt>
-// <FOpt>     ::= "^" <F> <FOpt> | <empty>
-// <NR>       ::= <Num> | "-"<Num> | "-"<Var> | <Var> | <Var> "(" <Var>|<Num> ")" | "(" <E> ")"
+// <FOpt>     ::= "^"|"**" <F> <FOpt> | <empty>
+// <NR>       ::= <Num> | "-"<Num> | "-"<Var> | <Var> | <Var> "(" <E> ")" | "(" <E> ")"
+
 let parser tList =
     let rec S tList =
         match tList with
         | Var _ :: Eql :: tail -> E tail
         | Var _ :: Lbr :: Var v :: Rbr :: Eql :: tail ->
-            varMap <- Map.add v (Int 0) varMap // temp add func var to map so expression will parse without VarUndefined
+            let origMap = varMap
+            varMap <- Map.add v (Int 0) varMap // temp add Var v to map so function expression can parse
             let tList = E tail
-            varMap <- Map.remove v varMap
+            varMap <- origMap
             tList
         | _ -> E tList
     and E tList = (T >> EOpt) tList
@@ -97,14 +99,9 @@ let parser tList =
     and NR tList =
         match tList with
         | Num _ :: tail | Sub :: Num _ :: tail -> tail
-        // | Var v :: tail -> match Map.tryFind v varMap with Some _ -> tail | None -> raise (VarUndefined(v))
-        // | Var v :: tail -> match varMap.ContainsKey(v) with true -> tail | false -> raise (VarUndefined(v))
-        | Var v :: Lbr :: n :: Rbr ::  tail -> NR [n] |> ignore; if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))
+        | Var v :: Lbr :: tail -> match E tail with | Rbr :: tail -> (if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))) | _ -> raise ParserError
         | Var v :: tail | Sub :: Var v :: tail -> if varMap.ContainsKey(v) then tail else raise (VarUndefined(v))
-        // | Var v :: tail when varMap.ContainsKey(v) -> tail
-        // | Var v :: _ -> raise (VarUndefined(v))
         | Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
-        // | Lbr :: e :: Rbr :: tail -> E [e] |> ignore; tail
         | _ -> raise ParserError
     S tList
 
@@ -114,7 +111,6 @@ let sub a b = match a, b with | Int a, Int b -> Int(a - b) | _ -> Float(toFloat 
 let mul a b = match a, b with | Int a, Int b -> Int(a * b) | _ -> Float(toFloat a * toFloat b)
 let div a b = match a, b with | Int a, Int b when b <> 0 -> Int(a / b) | _ -> Float(toFloat a / toFloat b)
 let pow a b = match a, b with | Int a, Int b -> Int(pown a b)  | _ -> Float(toFloat a ** toFloat b)
-
 let modulus a b = match a, b with | Int a, Int b -> Int(a % b) | _ -> Float(toFloat a % toFloat b)
 
 
@@ -127,7 +123,7 @@ let parseAndEval tList =
             (tList, value)
         | Var funcName :: Lbr :: Var n :: Rbr :: Eql :: tail ->
             funcMap <- Map.add funcName (n,tail) funcMap
-            (tList, Int 0)
+            (tList, Int 0) // got to return something
         | _ -> E tList
     and E tList = (T >> EOpt) tList
     and EOpt (tList, value) =
@@ -158,12 +154,16 @@ let parseAndEval tList =
         match tList with
         | Num value :: tail -> (tail, value)
         | Sub :: Num value :: tail -> (tail, sub (Int 0) value)
-        | Var funcName :: Lbr :: Num n :: Rbr ::  tail ->
-            let argName, func = Map.find funcName funcMap
-            varMap <- Map.add argName n varMap
-            let _,value = E func
-            varMap <- Map.remove argName varMap
-            (tail, value)
+        | Var funcName :: Lbr :: tail -> let tLst, n = E tail
+                                         match tLst with
+                                         | Rbr :: tail ->
+                                             let argName, func = Map.find funcName funcMap
+                                             let origMap = varMap
+                                             varMap <- Map.add argName n varMap
+                                             let _,value = E func
+                                             varMap <- origMap
+                                             (tail, value)
+                                         | _ -> raise ParserError
         | Var varName :: tail -> (tail, Map.find varName varMap)
         | Sub :: Var varName :: tail -> (tail, sub (Int 0) (Map.find varName varMap))
         | Lbr :: tail -> let tLst, value = E tail
@@ -192,11 +192,13 @@ let main (input:string, vM, fM)  =
         | VarUndefined(v) -> $"Variable {v} is not defined", varMap, funcMap
         | :? OverflowException -> "Overflow error, exceeded max value for int32", varMap, funcMap
 
-let plot (input:string, vM, fM)  =
+let plot (input:string, minX:string, maxX:string, vM, fM)  =
     varMap <- vM; funcMap <- fM
     let tokenList = lexer input
+    let minX, maxX = toFloat (snd (lexer minX |> parseAndEval)), toFloat (snd (lexer maxX |> parseAndEval))  // parses minX and maxX as numbers
+    let xVals = [for i in 0 .. 99 -> minX + (float i * (maxX-minX)/99.)] // creates 100 x values to plot over the x range
     match tokenList with
         | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
-            ( [for i in -10..10 -> (float i, toFloat(snd(parseAndEval([Var fn; Lbr; Num(Float(i)); Rbr]))))], varMap, funcMap)
+            ( [for x in xVals -> (float x, toFloat(snd(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr]))))], varMap, funcMap)
         | _ -> ([], varMap, funcMap)
 

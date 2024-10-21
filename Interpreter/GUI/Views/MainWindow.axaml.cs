@@ -21,7 +21,7 @@ namespace GUI.Views
 
         private void PlotOnClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            PlotPoints(Interpreter.plot(InputExpression.Text, storedVariables, storedFunctions).Item1);
+            PlotPoints(Interpreter.plot(InputExpression.Text, MinX.Text, MaxX.Text, storedVariables, storedFunctions).Item1);
         }
 
         private void PlotPoints(FSharpList<Tuple<double,double>> points)
