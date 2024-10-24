@@ -4,7 +4,7 @@ open System
 open Microsoft.FSharp.Core.Operators.Checked
 
 type Value = | Int of int | Float of float
-and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Num of Value | Var of string
+and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin | Tan | Exp | Log | Num of Value | Var of string
 
 exception LexerError of char
 exception ParserError
@@ -35,6 +35,19 @@ and scanStr(input, varName) =
     | c::tail when isLetter c || isDigit c -> scanStr(tail, varName + string c)
     | _ -> (input, varName)
 
+//check if list of chars starts with keyword
+let startsWith (keyword: string) (input: char list) =
+    let keywordChars = strToList keyword
+    let rec check kw input =
+        match kw, input with
+        | [], _ -> true // Finished checking all keyword characters
+        | kc::kTail, ic::iTail when kc = ic -> check kTail iTail
+        | _ -> false // Characters don't match
+    check keywordChars input
+
+//drop first n chars from list
+let drop n list =
+    list |> List.skip n
 
 let lexer input =
     let rec scan input =
@@ -49,6 +62,11 @@ let lexer input =
         | '('::tail -> Lbr :: scan tail
         | ')'::tail -> Rbr :: scan tail
         | '='::tail -> Eql :: scan tail
+        | _ when startsWith "cos" input -> Cos :: scan (drop 3 input)
+        | _ when startsWith "sin" input -> Sin :: scan (drop 3 input)
+        | _ when startsWith "tan" input -> Tan :: scan (drop 3 input)
+        | _ when startsWith "exp" input -> Exp :: scan (drop 3 input)
+        | _ when startsWith "log" input -> Log :: scan (drop 3 input)
         | c :: tail when isBlank c -> scan tail
         | c :: tail when isLetter c -> let remInput, varName = scanStr(tail, string c)
                                        Var varName :: scan remInput
@@ -99,6 +117,11 @@ let parser tList =
     and NR tList =
         match tList with
         | Num _ :: tail | Sub :: Num _ :: tail -> tail
+        | Cos :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
+        | Sin :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
+        | Tan :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
+        | Exp :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
+        | Log :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
         | Var v :: Lbr :: tail -> match E tail with | Rbr :: tail -> (if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))) | _ -> raise ParserError
         | Var v :: tail | Sub :: Var v :: tail -> if varMap.ContainsKey(v) then tail else raise (VarUndefined(v))
         | Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
@@ -154,6 +177,31 @@ let parseAndEval tList =
         match tList with
         | Num value :: tail -> (tail, value)
         | Sub :: Num value :: tail -> (tail, sub (Int 0) value)
+        | Cos :: Lbr :: tail ->
+            let tList', num = E tail
+            match tList' with
+            | Rbr :: tail -> (tail, Float (System.Math.Cos(toFloat num)))
+            | _ -> raise ParserError
+        | Sin :: Lbr :: tail ->
+            let tList', num = E tail
+            match tList' with
+            | Rbr :: tail -> (tail, Float (System.Math.Sin(toFloat num)))
+            | _ -> raise ParserError
+        | Tan :: Lbr :: tail ->
+            let tList', num = E tail
+            match tList' with
+            | Rbr :: tail -> (tail, Float (System.Math.Tan(toFloat num)))
+            | _ -> raise ParserError
+        | Exp :: Lbr :: tail ->
+            let tList', num = E tail
+            match tList' with
+            | Rbr :: tail -> (tail, Float (System.Math.Exp(toFloat num)))
+            | _ -> raise ParserError
+        | Log :: Lbr :: tail ->
+            let tList', num = E tail
+            match tList' with
+            | Rbr :: tail -> (tail, Float (System.Math.Log(toFloat num)))
+            | _ -> raise ParserError
         | Var funcName :: Lbr :: tail -> let tLst, n = E tail
                                          match tLst with
                                          | Rbr :: tail ->
