@@ -40,9 +40,9 @@ let startsWith (keyword: string) (input: char list) =
     let keywordChars = strToList keyword
     let rec check kw input =
         match kw, input with
-        | [], _ -> true // Finished checking all keyword characters
+        | [], _ -> true
         | kc::kTail, ic::iTail when kc = ic -> check kTail iTail
-        | _ -> false // Characters don't match
+        | _ -> false
     check keywordChars input
 
 //drop first n chars from list
