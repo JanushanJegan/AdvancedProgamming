@@ -71,10 +71,11 @@ let lexer input =
         | c :: tail when isLetter c -> let remInput, varName = scanStr(tail, string c)
                                        Var varName :: scan remInput
         | c :: tail when isDigit c -> let remInput, n = scanInt(tail, intVal c)
-                                      match remInput with
-                                      | '.'::tail -> let remInput, decimal = scanFloat(tail, 0., 1.)
-                                                     Num(Float(decimal+float n)) :: scan remInput
-                                      | _ -> Num(Int n) :: scan remInput
+                                      let n, remInput = match remInput with
+                                                          | '.'::tail -> let remInput, decimal = scanFloat(tail, 0., 1.)
+                                                                         Num(Float(decimal+float n)), remInput
+                                                          | _ -> Num(Int n), remInput
+                                      if remInput.Length > 0 && isLetter remInput.Head then (n :: Mul :: scan remInput) else (n :: scan remInput) // allows implicit multiplication of variables
         | _ -> raise (LexerError(List.head input))
     scan (strToList input)
 
