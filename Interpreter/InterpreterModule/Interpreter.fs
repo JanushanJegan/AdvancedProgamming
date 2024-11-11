@@ -4,7 +4,7 @@ open System
 open Microsoft.FSharp.Core.Operators.Checked
 
 type Value = | Int of int | Float of float
-and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin | Tan | Exp | Log | Num of Value | Var of string
+and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin | Tan | Exp | Ent | Log | Num of Value | Var of string
 
 exception LexerError of char
 exception ParserError
@@ -56,6 +56,7 @@ let lexer input =
         | '+'::tail -> Add :: scan tail
         | '-'::tail -> Sub :: scan tail
         | '*'::'*'::tail | '^'::tail -> Pow :: scan tail
+        | 'E'::tail -> Ent :: scan tail
         | '*'::tail -> Mul :: scan tail
         | '/'::tail -> Div :: scan tail
         | '%'::tail -> Mod :: scan tail
@@ -75,7 +76,7 @@ let lexer input =
                                                           | '.'::tail -> let remInput, decimal = scanFloat(tail, 0., 1.)
                                                                          Num(Float(decimal+float n)), remInput
                                                           | _ -> Num(Int n), remInput
-                                      if remInput.Length > 0 && isLetter remInput.Head then (n :: Mul :: scan remInput) else (n :: scan remInput) // allows implicit multiplication of variables
+                                      if remInput.Length > 0 && isLetter remInput.Head && remInput.Head<>'E' then (n :: Mul :: scan remInput) else (n :: scan remInput) // allows implicit multiplication of variables
         | _ -> raise (LexerError(List.head input))
     scan (strToList input)
 
@@ -87,7 +88,7 @@ let lexer input =
 // <TOpt>     ::= "*" <F> <TOpt> | "/" <F> <TOpt> | <empty>
 // <F>        ::== <NR> <FOpt>
 // <FOpt>     ::= "^"|"**" <F> <FOpt> | <empty>
-// <NR>       ::= <Num> | "-"<Num> | "-"<Var> | <Var> | <Var> "(" <E> ")" | "(" <E> ")"
+// <NR>       ::= <Num> | "-"<Num> | "-"<Var> | <Var> | <Var> "(" <E> ")" | <Cos|Sin|Tan|Exp|Log> "(" <E> ")" | "(" <E> ")"
 
 let parser tList =
     let rec S tList =
@@ -103,26 +104,22 @@ let parser tList =
     and E tList = (T >> EOpt) tList
     and EOpt tList =
         match tList with
-        | Add :: tail | Sub :: tail | Mod :: tail -> (T >> EOpt) tail
+        | (Add|Sub|Mod) :: tail -> (T >> EOpt) tail
         | _ -> tList
     and T tList = (F >> TOpt) tList
     and TOpt tList =
         match tList with
-        | Mul :: tail | Div :: tail -> (F >> TOpt) tail
+        | (Mul|Div) :: tail -> (F >> TOpt) tail
         | _ -> tList
     and F tList = (NR >> FOpt) tList
     and FOpt tList =
         match tList with
-        | Pow :: tail -> (F >> FOpt) tail
+        | (Pow|Ent) :: tail -> (F >> FOpt) tail
         | _ -> tList
     and NR tList =
         match tList with
         | Num _ :: tail | Sub :: Num _ :: tail -> tail
-        | Cos :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
-        | Sin :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
-        | Tan :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
-        | Exp :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
-        | Log :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
+        | (Cos|Sin|Tan|Exp|Log) :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
         | Var v :: Lbr :: tail -> match E tail with | Rbr :: tail -> (if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))) | _ -> raise ParserError
         | Var v :: tail | Sub :: Var v :: tail -> if varMap.ContainsKey(v) then tail else raise (VarUndefined(v))
         | Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
@@ -152,7 +149,6 @@ let parseAndEval tList =
     and E tList = (T >> EOpt) tList
     and EOpt (tList, value) =
         match tList with
-        // | Add :: tail -> EOpt (T tail ||> fun tLst tVal -> (tLst, add value tVal))
         | Add :: tail -> let tLst, tVal = T tail
                          EOpt (tLst, add value tVal)
         | Sub :: tail -> let tLst, tVal = T tail
@@ -173,41 +169,28 @@ let parseAndEval tList =
         match tList with
         | Pow :: tail -> let tLst, tVal = F tail
                          FOpt (tLst, pow value tVal)
+        | Ent :: tail -> let tLst, tVal = F tail  // scientific notation, E equivalent to *10**
+                         FOpt (tLst, mul value (pow (Int 10) tVal))
         | _ -> (tList, value)
     and NR tList =
         match tList with
         | Num value :: tail -> (tail, value)
         | Sub :: Num value :: tail -> (tail, sub (Int 0) value)
-        | Cos :: Lbr :: tail ->
+        | Cos|Sin|Tan|Exp|Log as f :: Lbr :: tail ->
             let tList', num = E tail
             match tList' with
-            | Rbr :: tail -> (tail, Float (System.Math.Cos(toFloat num)))
-            | _ -> raise ParserError
-        | Sin :: Lbr :: tail ->
-            let tList', num = E tail
-            match tList' with
-            | Rbr :: tail -> (tail, Float (System.Math.Sin(toFloat num)))
-            | _ -> raise ParserError
-        | Tan :: Lbr :: tail ->
-            let tList', num = E tail
-            match tList' with
-            | Rbr :: tail -> (tail, Float (System.Math.Tan(toFloat num)))
-            | _ -> raise ParserError
-        | Exp :: Lbr :: tail ->
-            let tList', num = E tail
-            match tList' with
-            | Rbr :: tail -> (tail, Float (System.Math.Exp(toFloat num)))
-            | _ -> raise ParserError
-        | Log :: Lbr :: tail ->
-            let tList', num = E tail
-            match tList' with
-            | Rbr :: tail -> (tail, Float (System.Math.Log(toFloat num)))
+            | Rbr :: tail -> match f with
+                             | Cos -> (tail, Float (Math.Cos(toFloat num)))
+                             | Sin -> (tail, Float (Math.Sin(toFloat num)))
+                             | Tan -> (tail, Float (Math.Tan(toFloat num)))
+                             | Log -> (tail, Float (Math.Log(toFloat num)))
+                             | Exp -> (tail, Float (Math.Exp(toFloat num)))
             | _ -> raise ParserError
         | Var funcName :: Lbr :: tail -> let tLst, n = E tail
                                          match tLst with
                                          | Rbr :: tail ->
                                              let argName, func = Map.find funcName funcMap
-                                             let origMap = varMap
+                                             let origMap = varMap  // store old varMap so vars with name of function variable aren't overwritten while evaluating func
                                              varMap <- Map.add argName n varMap
                                              let _,value = E func
                                              varMap <- origMap
@@ -226,7 +209,6 @@ let rec printTokenList (lst:list<terminal>) : list<string> =
     match lst with
     | head::tail -> printf $"{head.ToString()} "; printTokenList tail
     | [] -> printfn "EOL"; []
-
 let main (input:string, vM, fM)  =
     varMap <- vM; funcMap <- fM
     try
