@@ -9,8 +9,8 @@ namespace GUI.Views
 {
     public partial class MainWindow : Window
     {
-        private FSharpMap<string, Interpreter.Value> storedVariables = MapModule.Empty<string, Interpreter.Value>();
-        private FSharpMap<string, Tuple<string, FSharpList<Interpreter.terminal>>> storedFunctions = MapModule.Empty<string, Tuple<string, FSharpList<Interpreter.terminal>>>();
+        private FSharpMap<string, Types.Value> storedVariables = MapModule.Empty<string, Types.Value>();
+        private FSharpMap<string, Tuple<string, FSharpList<Types.terminal>>> storedFunctions = MapModule.Empty<string, Tuple<string, FSharpList<Types.terminal>>>();
 
         public MainWindow() { InitializeComponent(); }
 
@@ -25,6 +25,14 @@ namespace GUI.Views
             try {PlotPoints(Interpreter.plot(Input.Text, MinX.Text, MaxX.Text, storedVariables, storedFunctions).Item1);}
             catch (Exception error) { Output.Text = $"Error: {error.Message}"; }
         }
+
+        private void DifferentiateOnClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+
+            try { (Output.Text, storedVariables, storedFunctions) = Interpreter.differentiate(Input.Text, storedVariables, storedFunctions); }
+            catch (Exception error) { Output.Text = $"Error: {error.Message}"; }
+        }
+
 
         private void OnPlotMove(object? sender, OxyPlot.Axes.AxisChangedEventArgs e)
         {

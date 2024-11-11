@@ -10,7 +10,11 @@
             <TextBox Name="Input" Watermark="Enter Mathematical Expression:" />
             <Button Content="Evaluate" Click="CalculateOnClick" Margin="0,10"/>
             <TextBox Name="Output" IsReadOnly="True" Watermark="Result" />
-            <Button Content="Plot" Click="PlotOnClick" Margin="0,10"/>
+            <!-- <Button Content="Plot" Click="PlotOnClick" Margin="0,10"/> -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10">
+                <Button Content="Plot" Click="PlotOnClick" Margin="0,0,10,0"/>
+                <Button Content="Differentiate" Click="DifferentiateOnClick"/>
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,10">

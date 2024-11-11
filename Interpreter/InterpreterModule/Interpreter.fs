@@ -2,13 +2,7 @@ module InterpreterModule.Interpreter
 
 open System
 open Microsoft.FSharp.Core.Operators.Checked
-
-type Value = | Int of int | Float of float
-and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin | Tan | Exp | Ent | Log | Num of Value | Var of string
-
-exception LexerError of char
-exception ParserError
-exception VarUndefined of string
+open InterpreterModule.Types
 
 let mutable varMap = Map.empty<string, Value>
 let mutable funcMap = Map.empty<string, string * terminal list>
@@ -126,13 +120,6 @@ let parser tList =
         | _ -> raise ParserError
     S tList
 
-let toFloat = function | Int v -> float v | Float v -> v
-let add a b = match a, b with | Int a, Int b -> Int(a + b) | _ -> Float(toFloat a + toFloat b)
-let sub a b = match a, b with | Int a, Int b -> Int(a - b) | _ -> Float(toFloat a - toFloat b)
-let mul a b = match a, b with | Int a, Int b -> Int(a * b) | _ -> Float(toFloat a * toFloat b)
-let div a b = match a, b with | Int a, Int b when b <> 0 -> Int(a / b) | _ -> Float(toFloat a / toFloat b)
-let pow a b = match a, b with | Int a, Int b -> Int(pown a b)  | _ -> Float(toFloat a ** toFloat b)
-let modulus a b = match a, b with | Int a, Int b -> Int(a % b) | _ -> Float(toFloat a % toFloat b)
 
 
 let parseAndEval tList =
@@ -227,9 +214,26 @@ let plot (input:string, minX:string, maxX:string, vM, fM)  =
     varMap <- vM; funcMap <- fM
     let tokenList = lexer input
     let minX, maxX = toFloat (snd (lexer minX |> parseAndEval)), toFloat (snd (lexer maxX |> parseAndEval))  // parses minX and maxX as numbers
-    let xVals = [for i in 0 .. 99 -> minX + (float i * (maxX-minX)/99.)] // creates 100 x values to plot over the x range
+    let xVals = [for i in 0 .. 999 -> minX + (float i * (maxX-minX)/999.)] // creates 1000 x values to plot over the x range
     match tokenList with
         | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
             ( [for x in xVals -> (float x, toFloat(snd(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr]))))], varMap, funcMap)
         | _ -> ([], varMap, funcMap)
 
+let differentiate(input:string, vM, fM) =
+    varMap <- vM; funcMap <- fM
+    try
+        let tokenList = lexer input
+        printTokenList tokenList |> ignore
+        parser tokenList |> ignore
+        match tokenList with
+        | Var _ :: Lbr :: Var _ :: Rbr :: Eql :: tail ->
+            let result = Differentiator.differentiateToString tail
+            $"Result = {result}", varMap, funcMap
+        | _ -> "Invalid Equation", varMap, funcMap
+
+    with
+        | LexerError(c) -> $"Lexer Error, invalid token {c}", varMap, funcMap
+        | ParserError -> "Error parsing", varMap, funcMap
+        | VarUndefined(v) -> $"Variable {v} is not defined", varMap, funcMap
+        | :? OverflowException -> "Overflow error, exceeded max value for int32", varMap, funcMap
