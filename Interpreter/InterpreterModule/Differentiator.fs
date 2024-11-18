@@ -335,6 +335,9 @@ let differentiate tList =
         | _ -> raise ParserError
     diff tList
 
-let differentiateToString tList =
-    let differentiated = differentiate tList
-    unlexer (simplify differentiated)
+let diffAndSimplify tList = simplify (differentiate tList)
+let diffToString tList = unlexer (diffAndSimplify tList)
+
+
+
+
