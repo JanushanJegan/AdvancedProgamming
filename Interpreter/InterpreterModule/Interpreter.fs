@@ -43,10 +43,22 @@ let startsWith (keyword: string) (input: char list) =
 let drop n list =
     list |> List.skip n
 
+let lexNumber c tail =
+    let remInput, n = scanInt(tail, intVal c)
+    match remInput with
+    | '.'::tail -> let remInput, decimal = scanFloat(tail, 0., 1.)
+                   Num(Float(decimal+float n)), remInput
+    | _ -> Num(Int n), remInput
+
+
+
 let lexer input =
     let rec scan input =
         match input with
         | [] -> []
+        | '-'::c :: tail when isDigit c -> let n, remInput = lexNumber c tail
+                                           let n = match n with | Num (Int n) -> Num (Int(0 - n)) | Num (Float n) -> Num(Float(0.-n))
+                                           if remInput.Length > 0 && isLetter remInput.Head && remInput.Head<>'E' then (Add :: n :: Mul :: scan remInput) else (Add :: n :: scan remInput) // allows implicit multiplication of variables
         | '+'::tail -> Add :: scan tail
         | '-'::tail -> Sub :: scan tail
         | '*'::'*'::tail | '^'::tail -> Pow :: scan tail
@@ -65,11 +77,7 @@ let lexer input =
         | c :: tail when isBlank c -> scan tail
         | c :: tail when isLetter c -> let remInput, varName = scanStr(tail, string c)
                                        Var varName :: scan remInput
-        | c :: tail when isDigit c -> let remInput, n = scanInt(tail, intVal c)
-                                      let n, remInput = match remInput with
-                                                          | '.'::tail -> let remInput, decimal = scanFloat(tail, 0., 1.)
-                                                                         Num(Float(decimal+float n)), remInput
-                                                          | _ -> Num(Int n), remInput
+        | c :: tail when isDigit c -> let n, remInput = lexNumber c tail
                                       if remInput.Length > 0 && isLetter remInput.Head && remInput.Head<>'E' then (n :: Mul :: scan remInput) else (n :: scan remInput) // allows implicit multiplication of variables
         | _ -> raise (LexerError(List.head input))
     scan (strToList input)
@@ -112,7 +120,7 @@ let parser tList =
         | _ -> tList
     and NR tList =
         match tList with
-        | Num _ :: tail | Sub :: Num _ :: tail -> tail
+        | Num _ :: tail | Sub :: Num _ :: tail | Add :: Num _ :: tail -> tail
         | (Cos|Sin|Tan|Exp|Log) :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
         | Var v :: Lbr :: tail -> match E tail with | Rbr :: tail -> (if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))) | _ -> raise ParserError
         | Var v :: tail | Sub :: Var v :: tail -> if varMap.ContainsKey(v) then tail else raise (VarUndefined(v))
@@ -161,7 +169,7 @@ let parseAndEval tList =
         | _ -> (tList, value)
     and NR tList =
         match tList with
-        | Num value :: tail -> (tail, value)
+        | Num value :: tail | Add :: Num value :: tail -> (tail, value)
         | Sub :: Num value :: tail -> (tail, sub (Int 0) value)
         | Cos|Sin|Tan|Exp|Log as f :: Lbr :: tail ->
             let tList', num = E tail
