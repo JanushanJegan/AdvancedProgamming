@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "JuR3p6LeECA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\InterpreterModule.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\janus\\.nuget\\packages\\fsharp.core\\8.0.401\\fsharp.core.8.0.401.nupkg.sha512"
+  ],
+  "logs": []
+}

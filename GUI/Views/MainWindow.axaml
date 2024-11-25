@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="GUI.Views.MainWindow"
+        Width="500" Height="300" Title="Maths Interpreter">
+	<StackPanel Margin="10">
+		<TextBox Name="InputExpression" Watermark="Enter Mathematical Expression:" />
+		<Button Content="Evaluate" Click="CalculateOnClick" Margin="0,10,0,10"/>
+		<TextBox Name="OutputResult" IsReadOnly="True" Watermark="Result" />
+
+		<!-- New Buttons for Rational and Complex Modes -->
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+			<Button Content="Rational Mode" Name="RationalModeButton" Click="RationalModeButton_Click" Margin="5,0,5,0"/>
+			<Button Content="Complex Mode" Name="ComplexModeButton" Click="ComplexModeButton_Click" Margin="5,0,5,0"/>
+			<Button Content="Reset Mode" Name="ResetModeButton" Click="ResetModeButton_Click" Margin="5,0,5,0"/>
+		</StackPanel>
+	</StackPanel>
+</Window>
