@@ -46,8 +46,8 @@ let lexNumber c tail =
     let remInput, n = scanInt(tail, intVal c)
     match remInput with
     | '.'::tail -> let remInput, decimal = scanFloat(tail, 0., 1.)
-                   Num(Float(decimal+float n)), remInput
-    | _ -> Num(Int n), remInput
+                   Float(decimal+float n), remInput
+    | _ -> Int n, remInput
 
 
 
@@ -55,9 +55,9 @@ let lexer input =
     let rec scan input =
         match input with
         | [] -> []
-        | '-'::c :: tail when isDigit c -> let n, remInput = lexNumber c tail
-                                           let n = match n with | Num (Int n) -> Num (Int(0 - n)) | Num (Float n) -> Num(Float(0.-n))
-                                           if remInput.Length > 0 && isLetter remInput.Head && remInput.Head<>'E' then (Add :: n :: Mul :: scan remInput) else (Add :: n :: scan remInput) // allows implicit multiplication of variables
+        | '-'::c :: tail when isDigit c -> let n, remInput = lexNumber c tail // keep - attached to numbers, helps with algebraic manipulation later on
+                                           let n = Num (sub (Int 0) n)
+                                           match remInput with | a::_ when (isLetter a && a<>'E') -> Add :: n :: Mul :: scan remInput | _ -> Add :: n :: scan remInput // allows implicit multiplication of variables
         | '+'::tail -> Add :: scan tail
         | '-'::tail -> Sub :: scan tail
         | '*'::'*'::tail | '^'::tail -> Pow :: scan tail
@@ -77,7 +77,7 @@ let lexer input =
         | c :: tail when isLetter c -> let remInput, varName = scanStr(tail, string c)
                                        Var varName :: scan remInput
         | c :: tail when isDigit c -> let n, remInput = lexNumber c tail
-                                      if remInput.Length > 0 && isLetter remInput.Head && remInput.Head<>'E' then (n :: Mul :: scan remInput) else (n :: scan remInput) // allows implicit multiplication of variables
+                                      match remInput with | a::_ when (isLetter a && a<>'E') -> Num n :: Mul :: scan remInput | _ -> Num n :: scan remInput // allows implicit multiplication of variables
         | _ -> raise (LexerError(List.head input))
     scan (strToList input)
 
@@ -89,7 +89,7 @@ let lexer input =
 // <TOpt>     ::= "*" <F> <TOpt> | "/" <F> <TOpt> | <empty>
 // <F>        ::== <NR> <FOpt>
 // <FOpt>     ::= "^"|"**" <F> <FOpt> | <empty>
-// <NR>       ::= <Num> | "-"<Num> | "-"<Var> | <Var> | <Var> "(" <E> ")" | <Cos|Sin|Tan|Exp|Log> "(" <E> ")" | "(" <E> ")"
+// <NR>       ::= "+" <NR> | "-" <NR> | <Num> | <Var> | <Var> "(" <E> ")" | <Cos|Sin|Tan|Exp|Log> "(" <E> ")" | "(" <E> ")"
 
 let parser tList =
     let rec S tList =
@@ -119,11 +119,12 @@ let parser tList =
         | _ -> tList
     and NR tList =
         match tList with
-        | Num _ :: tail | Sub :: Num _ :: tail | Add :: Num _ :: tail -> tail
+        | (Add|Sub) :: tail -> tail // handles repeated signs like 2+-3 or unary signs like -cos
+        | Num _ :: tail -> tail
         | (Cos|Sin|Tan|Exp|Log) :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
-        | Var v :: Lbr :: tail -> match E tail with | Rbr :: tail -> (if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))) | _ -> raise ParserError
-        | Var v :: tail | Sub :: Var v :: tail -> if varMap.ContainsKey(v) then tail else raise (VarUndefined(v))
-        | Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
+        | Var v :: Lbr :: tail -> match E tail with | Rbr :: tail -> (if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))) | _ -> raise ParserError // function f(x)
+        | Var v :: tail -> if varMap.ContainsKey(v) then tail else raise (VarUndefined(v)) // variable x
+        | Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError // bracketed expression
         | _ -> raise ParserError
     S tList
 
@@ -168,8 +169,11 @@ let parseAndEval tList =
         | _ -> (tList, value)
     and NR tList =
         match tList with
-        | Num value :: tail | Add :: Num value :: tail -> (tail, value)
-        | Sub :: Num value :: tail -> (tail, sub (Int 0) value)
+        | Sub :: tail -> let tail, value = NR tail
+                         tail, sub (Int 0) value
+        | Add :: tail -> NR tail
+
+        | Num value :: tail -> (tail, value)
         | Cos|Sin|Tan|Exp|Log as f :: Lbr :: tail ->
             let tList', num = E tail
             match tList' with
@@ -179,7 +183,7 @@ let parseAndEval tList =
                              | Tan -> (tail, Float (Math.Tan(toFloat num)))
                              | Log -> (tail, Float (Math.Log(toFloat num)))
                              | Exp -> (tail, Float (Math.Exp(toFloat num)))
-            | _ -> raise ParserError
+
         | Var funcName :: Lbr :: tail -> let tLst, n = E tail
                                          match tLst with
                                          | Rbr :: tail ->
@@ -191,7 +195,6 @@ let parseAndEval tList =
                                              (tail, value)
                                          | _ -> raise ParserError
         | Var varName :: tail -> (tail, Map.find varName varMap)
-        | Sub :: Var varName :: tail -> (tail, sub (Int 0) (Map.find varName varMap))
         | Lbr :: tail -> let tLst, value = E tail
                          match tLst with
                           | Rbr :: tail -> (tail, value)
@@ -218,15 +221,21 @@ let main (input:string, vM, fM)  =
         | :? OverflowException -> "Overflow error, exceeded max value for int32", varMap, funcMap
 
 let plot (input:string, minX:string, maxX:string, vM, fM)  =
-    varMap <- vM; funcMap <- fM
-    let tokenList = lexer input
-    parseAndEval tokenList |> ignore
-    let minX, maxX = toFloat (lexer minX |> parseAndEval), toFloat (lexer maxX |> parseAndEval)  // parses minX and maxX as numbers
-    let xVals = [for i in 0 .. 999 -> minX + (float i * (maxX-minX)/999.)] // creates 1000 x values to plot over the x range
-    match tokenList with
-        | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
-            ( [for x in xVals -> (float x, toFloat(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr])))], vM, fM)
-        | _ -> ([], vM, fM)
+    try
+        varMap <- vM; funcMap <- fM
+        let tokenList = lexer input
+        parseAndEval tokenList |> ignore
+        let minX, maxX = toFloat (lexer minX |> parseAndEval), toFloat (lexer maxX |> parseAndEval)  // parses minX and maxX as numbers
+        let xVals = [for i in 0 .. 999 -> minX + (float i * (maxX-minX)/999.)] // creates 1000 x values to plot over the x range
+        match tokenList with
+            | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
+                "", [for x in xVals -> (float x, toFloat(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr])))]
+            | _ -> "", []
+    with
+        | LexerError(c) -> $"Lexer Error, invalid token {c}", []
+        | ParserError -> "Error parsing", []
+        | VarUndefined(v) -> $"Variable {v} is not defined", []
+        | :? OverflowException -> "Overflow error, exceeded max value for int32", []
 
 
 let differentiate(input:string, vM, fM) =
@@ -236,8 +245,7 @@ let differentiate(input:string, vM, fM) =
         parser tokenList |> ignore
         match tokenList with
         | Var y :: Lbr :: Var x :: Rbr :: Eql :: tail ->
-            let result = Differentiator.diffToString tail x
-            $"d{y}/d{x} = {result}", varMap, funcMap
+            $"d{y}/d{x} = {Differentiator.diffToString tail x}", varMap, funcMap
         | _ -> "Invalid Equation", varMap, funcMap
 
     with
@@ -247,21 +255,30 @@ let differentiate(input:string, vM, fM) =
         | :? OverflowException -> "Overflow error, exceeded max value for int32", varMap, funcMap
 
 let getTangentAtPoint (input: string, xVal: string, vM, fM) =
-    varMap <- vM; funcMap <- fM
-    let tokenList = lexer input
-    parser tokenList |> ignore
-    let xVal = lexer xVal |> parseAndEval
+    try
+        varMap <- vM; funcMap <- fM
+        let tokenList = lexer input
+        parseAndEval tokenList |> ignore
+        let xVal = lexer xVal |> parseAndEval  // parse xVal as a number
 
-    match tokenList with
-    | Var y :: Lbr :: Var x :: Rbr :: Eql :: tail ->
-            let yVal = toFloat(parseAndEval([Var y; Lbr; Num xVal; Rbr]))
-            let differentiated = Differentiator.diffAndSimplify tail x
-            parseAndEval (Var y :: Lbr :: Var x :: Rbr :: Eql :: differentiated)
-            let m = parseAndEval [Var y; Lbr; Num xVal; Rbr]
-            printfn $"Gradient at {xVal} = {m}"
-            let tangentEqn = $"{y}({x}) = {toFloat m} * ({x} - {toFloat xVal}) + {yVal}"
-            printfn $"Tangent Equation: {tangentEqn}"
-            tangentEqn
+        match tokenList with
+        | Var y :: Lbr :: Var x :: Rbr :: Eql :: tail ->
+                printfn $"Gradient of %A{tokenList} at {xVal}"
+                let yVal = toFloat(parseAndEval([Var y; Lbr; Num xVal; Rbr])) // gets y value of function at tangent x
+                let differentiated = Differentiator.diffAndSimplify tail x  // differentiates equation
+                parseAndEval (Var y :: Lbr :: Var x :: Rbr :: Eql :: differentiated) |> ignore
+                let m = toFloat (parseAndEval [Var y; Lbr; Num xVal; Rbr])
+                printfn $"Differentiated to %A{differentiated}, Gradient at {xVal} = {m}"
+                let tangentEqn = $"{y}({x}) = {m} * ({x} - {toFloat xVal}) + {yVal}"
+                let tangentEqnSimp = Differentiator.simplifyToString (lexer $"{m} * ({x} - {toFloat xVal}) + {yVal}")
+                let roundCoeffs (input: string) = Text.RegularExpressions.Regex.Replace(input, @"\d+(\.\d+)?", fun m -> Math.Round ((float m.Value), 3) |> string)  // rounds numbers in equation
+                printfn $"Tangent Equation: {tangentEqn} -> {tangentEqnSimp} -> {roundCoeffs tangentEqnSimp}"
+                $"{y}({x}) = {roundCoeffs tangentEqnSimp}", ""
+                // Tangent Equation: y(x) = 45426.093625176574 * (x - 7) + 32768 -> 45426.093625176574x - 285214.655376236 -> 45426.094x - 285214.655
+        | _ -> "", "Invalid Equation"
+    with
+        | LexerError(c) -> "", $"Lexer Error, invalid token {c}"
+        | ParserError -> "", "Error parsing"
+        | VarUndefined(v) -> "", $"Variable {v} is not defined"
+        | :? OverflowException -> "", "Overflow error, exceeded max value for int32"
 
-
-    // | _ -> "Invalid Equation"

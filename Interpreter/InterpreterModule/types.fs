@@ -6,6 +6,7 @@ and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin |
 exception LexerError of char
 exception ParserError
 exception VarUndefined of string
+exception InvalidEquation
 
 let toFloat = function | Int v -> float v | Float v -> v
 let add a b = match a, b with | Int a, Int b -> Int(a + b) | _ -> Float(toFloat a + toFloat b)
