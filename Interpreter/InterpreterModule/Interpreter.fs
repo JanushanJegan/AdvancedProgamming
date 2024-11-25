@@ -4,7 +4,7 @@ open System
 open Microsoft.FSharp.Core.Operators.Checked
 
 type Value = | Int of int | Float of float
-and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin | Tan | Exp | Log | Num of Value | Var of string
+and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin | Tan | Exp | Log | Comma | Integral | Num of Value | Var of string
 
 exception LexerError of char
 exception ParserError
@@ -62,11 +62,13 @@ let lexer input =
         | '('::tail -> Lbr :: scan tail
         | ')'::tail -> Rbr :: scan tail
         | '='::tail -> Eql :: scan tail
+        | ','::tail -> Comma :: scan tail
         | _ when startsWith "cos" input -> Cos :: scan (drop 3 input)
         | _ when startsWith "sin" input -> Sin :: scan (drop 3 input)
         | _ when startsWith "tan" input -> Tan :: scan (drop 3 input)
         | _ when startsWith "exp" input -> Exp :: scan (drop 3 input)
         | _ when startsWith "log" input -> Log :: scan (drop 3 input)
+        | _ when startsWith "integral" input -> Integral :: scan (drop 8 input)
         | c :: tail when isBlank c -> scan tail
         | c :: tail when isLetter c -> let remInput, varName = scanStr(tail, string c)
                                        Var varName :: scan remInput
@@ -95,10 +97,15 @@ let parser tList =
         | Var _ :: Eql :: tail -> E tail
         | Var _ :: Lbr :: Var v :: Rbr :: Eql :: tail ->
             let origMap = varMap
-            varMap <- Map.add v (Int 0) varMap // temp add Var v to map so function expression can parse
+            varMap <- Map.add v (Int 0) varMap //add Var v to map temporary so function expression can parse
             let tList = E tail
             varMap <- origMap
             tList
+        | Integral :: Lbr :: Var f :: Comma :: Num a :: Comma :: Num b :: Comma :: Num steps :: Rbr :: tail ->
+            if not (funcMap.ContainsKey(f)) then
+                raise (VarUndefined(f))
+            else
+                tail //integral parsed
         | _ -> E tList
     and E tList = (T >> EOpt) tList
     and EOpt tList =
@@ -147,6 +154,9 @@ let parseAndEval tList =
             (tList, value)
         | Var funcName :: Lbr :: Var n :: Rbr :: Eql :: tail ->
             funcMap <- Map.add funcName (n,tail) funcMap
+            //debug
+            printfn "funcMap: %A" funcMap
+            //endDebug
             (tList, Int 0) // got to return something
         | _ -> E tList
     and E tList = (T >> EOpt) tList
@@ -219,6 +229,104 @@ let parseAndEval tList =
                          match tLst with
                           | Rbr :: tail -> (tail, value)
                           | _ -> raise ParserError
+        | Integral :: Lbr :: Var f :: Comma :: Num a :: Comma :: Num b :: Comma :: Num steps :: Rbr :: tail ->
+            printfn "Integral Input: %s, Range: (%A, %A), Steps: %A" f a b steps
+            let stepCount =
+                match steps with
+                | Int s when s > 0 -> s
+                | Float s when s > 0.0 -> int s
+                | _ -> raise (ArgumentException "Number of steps must be a positive integer.")
+            if not (funcMap.ContainsKey(f)) then
+                raise (VarUndefined(f))
+            else
+                let h = (toFloat b - toFloat a) / float stepCount
+                if h = 0.0 then
+                    (tail, Float 0.0) //range 0, integral 0
+                else
+                    //Inline func eval for f(x) -- MOVE OUTSIDE?
+                    let argName, funcTokens = funcMap.[f]
+                    let evaluateFunction x =
+                        let origMap = varMap
+                        varMap <- Map.add argName (Float x) varMap
+                        let rec evalTokens tokens =
+                            match tokens with
+                            | Var v :: Pow :: Num exp :: rest when varMap.ContainsKey(v) ->
+                                //`Var v ^ Num exp`
+                                let baseValue = varMap.[v]
+                                let expValue = toFloat exp
+                                (pow baseValue (Float expValue), rest)
+                            | Var v :: Pow :: rest when varMap.ContainsKey(v) ->
+                                //`Var v ^ <expression>`
+                                let baseValue = varMap.[v]
+                                let expValue, remainingTokens = evalTokens rest
+                                (pow baseValue expValue, remainingTokens)
+                            | Num baseValue :: Pow :: Num exp :: rest ->
+                                //`Num baseValue ^ Num exp`
+                                let baseValueFloat = toFloat baseValue
+                                let expValue = toFloat exp
+                                (Float (baseValueFloat ** expValue), rest)
+                            | Num baseValue :: Pow :: rest ->
+                                //Handle `Num baseValue ^ <expression>`
+                                let baseValueFloat = toFloat baseValue
+                                let expValue, remainingTokens = evalTokens rest
+                                (Float (baseValueFloat ** toFloat expValue), remainingTokens)
+                            | Cos :: Lbr :: rest ->
+                                //`cos(expression)`
+                                let value, remainingTokens = evalTokens rest
+                                match remainingTokens with
+                                | Rbr :: tail -> (Float (System.Math.Cos(toFloat value)), tail)
+                                | _ -> raise ParserError
+                            | Sin :: Lbr :: rest ->
+                                //`sin(expression)`
+                                let value, remainingTokens = evalTokens rest
+                                match remainingTokens with
+                                | Rbr :: tail -> (Float (System.Math.Sin(toFloat value)), tail)
+                                | _ -> raise ParserError
+                            | Exp :: Lbr :: rest ->
+                                //`exp(expression)`
+                                let value, remainingTokens = evalTokens rest
+                                match remainingTokens with
+                                | Rbr :: tail -> (Float (System.Math.Exp(toFloat value)), tail)
+                                | _ -> raise ParserError
+                            | Num value :: rest ->
+                                //generic numberfs
+                                (value, rest)
+                            | Var v :: rest when varMap.ContainsKey(v) ->
+                                //generic vars
+                                (varMap.[v], rest)
+                            | Add :: rest ->
+                                let left, remLeft = evalTokens rest
+                                let right, remRight = evalTokens remLeft
+                                (add left right, remRight)
+                            | Sub :: rest ->
+                                let left, remLeft = evalTokens rest
+                                let right, remRight = evalTokens remLeft
+                                (sub left right, remRight)
+                            | Mul :: rest ->
+                                let left, remLeft = evalTokens rest
+                                let right, remRight = evalTokens remLeft
+                                (mul left right, remRight)
+                            | Div :: rest ->
+                                let left, remLeft = evalTokens rest
+                                let right, remRight = evalTokens remLeft
+                                (div left right, remRight)
+                            | _ -> raise ParserError
+                        let result, _ = evalTokens funcTokens
+                        varMap <- origMap
+                        //debug
+                        printfn "x = %f, f(x) = %f" x (toFloat result)
+                        toFloat result
+                    //trapezoid integration
+                    let trapezoidSum =
+                        Seq.init (stepCount + 1) (fun i -> toFloat a + float i * h) //x vals
+                        |> Seq.map evaluateFunction
+                        |> Seq.pairwise
+                        |> Seq.mapi (fun i (y1, y2) ->
+                            let area = 0.5 * h * (y1 + y2)
+                            printfn "Trapezoid %d: y1 = %f, y2 = %f, Area = %f" i y1 y2 area //Debug steps
+                            area)
+                        |> Seq.sum
+                    (tail, Float trapezoidSum)
         | _ -> raise ParserError
     S tList
 
@@ -232,7 +340,10 @@ let main (input:string, vM, fM)  =
     try
         let tokenList = lexer input
         printTokenList tokenList |> ignore
-        parser tokenList |> ignore
+        //debug
+        //let parsedTokens = parser tokenList
+        //printfn "Tokens passed to parseAndEval: %A" parsedTokens
+        //parser tokenList |> ignore
         let _, result = parseAndEval tokenList
         $"Result = {result}", varMap, funcMap
     with
@@ -250,4 +361,3 @@ let plot (input:string, minX:string, maxX:string, vM, fM)  =
         | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
             ( [for x in xVals -> (float x, toFloat(snd(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr]))))], varMap, funcMap)
         | _ -> ([], varMap, funcMap)
-
