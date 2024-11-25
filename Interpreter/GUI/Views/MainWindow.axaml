@@ -18,11 +18,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,10">
-            <TextBlock Text="X Range:" Margin="0,0,0,10"/>
-            <TextBox Name="MinX" Text="-10" Width="40" Watermark="Min X"/>
-            <TextBox Name="MaxX" Text="10" Width="40" Watermark="Max X"/>
+            <TextBlock Text="Plot Range:" Margin="0,0,0,10"/>
+            <TextBox Name="MinX" Text="-10" Width="40" Watermark="Min"/>
+            <TextBox Name="MaxX" Text="10" Width="40" Watermark="Max"/>
             <Button Content="Tangent" Click="PlotTangent" Margin="0,10,0,10"/>
-            <TextBox Name="TangX" Width="40" Watermark="X Val"/>
+            <TextBox Name="TangX" Width="40" Watermark="Point"/>
         </StackPanel>
 
         <oxy:PlotView Grid.Column="2" Grid.Row="1" Name="PlotView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

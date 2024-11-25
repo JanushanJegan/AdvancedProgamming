@@ -70,7 +70,12 @@ namespace GUI.Views
             var (plotModel, lineSeries) = (new PlotModel(), new LineSeries());
             foreach (var p in points) { lineSeries.Points.Add(new DataPoint(p.Item1, p.Item2)); }
             plotModel.Series.Add(lineSeries);
+
             PlotView.Model = plotModel;
+            PlotView.Model.Axes[0].MajorGridlineStyle = LineStyle.Solid;
+            // PlotView.Model.Axes[0].MinorGridlineStyle = LineStyle.Dot;
+            PlotView.Model.Axes[1].MajorGridlineStyle = LineStyle.Solid;
+            // PlotView.Model.Axes[1].MinorGridlineStyle = LineStyle.Dot;
             PlotView.Model.Axes[0].AxisChanged += OnPlotMove;
             KeyDown += OnZoomKey;
         }

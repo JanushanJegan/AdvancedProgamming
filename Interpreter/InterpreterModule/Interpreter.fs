@@ -7,8 +7,7 @@ open InterpreterModule.Types
 let mutable varMap = Map.empty<string, Value>
 let mutable funcMap = Map.empty<string, string * terminal list>
 
-let initVarMap() = Map.empty<string, Value>
-let initFuncMap() = Map.empty<string, string * terminal list>
+
 let strToList s = [for c in s -> c]
 let isBlank c = Char.IsWhiteSpace c
 let isDigit c = Char.IsDigit c
@@ -198,7 +197,7 @@ let parseAndEval tList =
                           | Rbr :: tail -> (tail, value)
                           | _ -> raise ParserError
         | _ -> raise ParserError
-    S tList
+    snd (S tList)
 
 let rec printTokenList (lst:list<terminal>) : list<string> =
     match lst with
@@ -210,7 +209,7 @@ let main (input:string, vM, fM)  =
         let tokenList = lexer input
         printTokenList tokenList |> ignore
         parser tokenList |> ignore
-        let _, result = parseAndEval tokenList
+        let result = parseAndEval tokenList
         $"Result = {result}", varMap, funcMap
     with
         | LexerError(c) -> $"Lexer Error, invalid token {c}", varMap, funcMap
@@ -222,11 +221,11 @@ let plot (input:string, minX:string, maxX:string, vM, fM)  =
     varMap <- vM; funcMap <- fM
     let tokenList = lexer input
     parseAndEval tokenList |> ignore
-    let minX, maxX = toFloat (snd (lexer minX |> parseAndEval)), toFloat (snd (lexer maxX |> parseAndEval))  // parses minX and maxX as numbers
+    let minX, maxX = toFloat (lexer minX |> parseAndEval), toFloat (lexer maxX |> parseAndEval)  // parses minX and maxX as numbers
     let xVals = [for i in 0 .. 999 -> minX + (float i * (maxX-minX)/999.)] // creates 1000 x values to plot over the x range
     match tokenList with
         | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
-            ( [for x in xVals -> (float x, toFloat(snd(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr]))))], vM, fM)
+            ( [for x in xVals -> (float x, toFloat(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr])))], vM, fM)
         | _ -> ([], vM, fM)
 
 
@@ -237,7 +236,7 @@ let differentiate(input:string, vM, fM) =
         parser tokenList |> ignore
         match tokenList with
         | Var y :: Lbr :: Var x :: Rbr :: Eql :: tail ->
-            let result = Differentiator.diffToString tail
+            let result = Differentiator.diffToString tail x
             $"d{y}/d{x} = {result}", varMap, funcMap
         | _ -> "Invalid Equation", varMap, funcMap
 
@@ -251,14 +250,14 @@ let getTangentAtPoint (input: string, xVal: string, vM, fM) =
     varMap <- vM; funcMap <- fM
     let tokenList = lexer input
     parser tokenList |> ignore
-    let xVal = snd (lexer xVal |> parseAndEval)
+    let xVal = lexer xVal |> parseAndEval
 
     match tokenList with
     | Var y :: Lbr :: Var x :: Rbr :: Eql :: tail ->
-            let yVal = toFloat(snd(parseAndEval([Var y; Lbr; Num xVal; Rbr])))
-            let differentiated = Differentiator.diffAndSimplify tail
+            let yVal = toFloat(parseAndEval([Var y; Lbr; Num xVal; Rbr]))
+            let differentiated = Differentiator.diffAndSimplify tail x
             parseAndEval (Var y :: Lbr :: Var x :: Rbr :: Eql :: differentiated)
-            let _, m = parseAndEval [Var y; Lbr; Num xVal; Rbr]
+            let m = parseAndEval [Var y; Lbr; Num xVal; Rbr]
             printfn $"Gradient at {xVal} = {m}"
             let tangentEqn = $"{y}({x}) = {toFloat m} * ({x} - {toFloat xVal}) + {yVal}"
             printfn $"Tangent Equation: {tangentEqn}"

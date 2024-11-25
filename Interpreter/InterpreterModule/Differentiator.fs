@@ -27,7 +27,7 @@ let unlexer tList =
         | _ -> raise ParserError
     toString tList
 
-/// extract sub-expression contained within brackets e.g. 3+3(x+3)^2) * 3 -> 3+3(x+3)^2
+/// extract sub-expression contained within opened brackets e.g. 3+3(x+3)^2) * 3 -> 3+3(x+3)^2
 let rec getExprFromBrackets tList depth =
     match tList with
     | [] -> ([], [])
@@ -41,7 +41,7 @@ let rec getExprFromBrackets tList depth =
 let containsAny elements list = List.exists (fun x -> List.contains x list) elements
 let startsWithAny elements = function | a::_ when List.contains a elements -> true | _ -> false
 
-let getNextTerm tList =
+let getNextTerm tList =  // 2*(3x+5)^2 + 8x^3 -> 2*(3x+5)^2
     let rec loop acc tList depth =
         match tList with
         | [] -> (List.rev acc, [])
@@ -74,16 +74,16 @@ let rec splitAtOperator op tList depth =
         (head :: left, right)
 /// gets current level of expression, ignoring nested expressions - 3x + (2x*3) + 7 -> 3x * () * 7
 let rec getCurrentLevel tList depth =
-        match tList with
-        | [] -> []
-        | Rbr :: tail ->  Rbr :: getCurrentLevel tail (depth - 1)
-        | Lbr :: tail -> Lbr :: getCurrentLevel tail (depth + 1)
-        | head :: tail when depth = 1 -> head :: (getCurrentLevel tail 1)
-        | _ :: tail -> (getCurrentLevel tail depth)
+    match tList with
+    | [] -> []
+    | Rbr :: tail ->  Rbr :: getCurrentLevel tail (depth - 1)
+    | Lbr :: tail -> Lbr :: getCurrentLevel tail (depth + 1)
+    | head :: tail when depth = 1 -> head :: (getCurrentLevel tail 1)
+    | _ :: tail -> (getCurrentLevel tail depth)
 // let containsAny elements = function | a::_ when List.contains a elements -> true | _ -> false
 let rec simplify terminals =
     let combineLikeTerms tList =
-        let rec convert acc tail =
+        let rec convert acc tail = // expands each term to form ax^n
             match tail with
             | Num n :: Mul :: Var v :: Pow :: Num p :: tail when (tail.Length=0 || tail.Head=Add) ->  convert (acc@[Num n; Mul; Var v; Pow; Num p]) tail
             | Var v :: Pow :: Num p :: tail when (tail.Length=0 || tail.Head=Add) -> convert (acc@[Num (Int 1); Mul; Var v; Pow; Num p]) tail
@@ -95,7 +95,7 @@ let rec simplify terminals =
         let converted, rest = convert [] tList
         printfn $"Converted: %A{unlexer converted}, The rest: {unlexer rest}"
         let mutable termMap = Map.empty<terminal list, Value>
-        let rec loop tList =
+        let rec loop tList =  // collects terms in a map
             match tList with
             | Num n :: Mul :: Var v :: Pow :: Num p :: tail ->
                 let term = [Var v; Pow; Num p]
@@ -108,8 +108,7 @@ let rec simplify terminals =
         (termMap
         |> Map.toList
         |> List.sortByDescending (fun (term, _) -> match term with | Var _ :: Pow :: Num p :: _ -> toFloat p) // sort by power
-        |> List.fold (fun acc (term, coeff) -> acc @ simplify (Num coeff :: Mul ::term) @ [Add] ) []
-
+        |> List.fold (fun acc (term, coeff) -> acc @ simplify (Num coeff :: Mul ::term) @ [Add] ) [] // rebuild expression from map
         , rest)
 
 
@@ -118,7 +117,7 @@ let rec simplify terminals =
         | _ -> true
 
 
-    let splitByElement lst =
+    let splitTerms lst = // 3x + 5 + x^2 -> [3x], [5], [x^2]
         let rec split acc current = function
             | [] -> List.rev (List.rev current :: acc)
             | (Add|Sub)::tail when current.Length>0 -> split (List.rev current :: acc) [] tail
@@ -211,14 +210,14 @@ let rec simplify terminals =
             match (leftExpr, rightExpr) with
             // one of the brackets contains multiple terms so needs expanding, and neither brackets are raised to a power
             | _ when (containsAny [Add; Sub] leftExpr || containsAny [Add; Sub] rightExpr) && (match (List.rev leftExpr) with | Num _::Pow::Rbr::_ -> false | _ -> true && match (List.rev rightExpr) with | Num _::Pow::Rbr::_ -> false | _ -> true) ->
-                let expansion = expandBrackets (splitByElement leftExpr) (splitByElement rightExpr)
+                let expansion = expandBrackets (splitTerms leftExpr) (splitTerms rightExpr)
                 printfn $"expanded to %A{unlexer expansion}"
                 printfn $"Result: %A{unlexer (before@expansion@after)}"
                 simplifyExpr (before@Lbr::expansion@Rbr::after) []
             | (_, Lbr::Num n::[ Rbr ]) | (_, [Num n]) -> printfn "Doing something*number"; simplifyExpr (before@[Num n]@[Mul]@leftExpr@after) [] // something like 3x^2 * 3, swap round so numbers can becombined
             | _ -> printfn "Doing last one"; simplifyExpr (b::rest) (acc @ [Mul]) // simple term * term, no need to expand
 
-        | a :: Div :: b :: rest when (fst (getNextTerm (b::rest)))=(fst (getLastTerm (acc@[a]))) ->
+        | a :: Div :: b :: rest when (fst (getNextTerm (b::rest)))=(fst (getLastTerm (acc@[a]))) -> // (3x+5)/(3x+5) -> 1
             printfn "Cancelling fraction"
 
             let _, start = getLastTerm (acc@[a])
@@ -245,13 +244,10 @@ let rec simplify terminals =
 
     simplifyExpr terminals []
 
-let differentiate tList =
+let differentiate tList tv = // tv target variable to differentiate with respect to
     printfn $"Differentiating %A{unlexer tList}"
     let tList = simplify tList
     printfn $"Simplified to %A{unlexer tList}"
-    let tv = "x"
-
-
 
     /// don't do chain rule if bracket is part of * or /, do product rule/quotient rule first instead
     let doChainRule tail = let _, remaining = getExprFromBrackets tail 1
@@ -331,12 +327,12 @@ let differentiate tList =
         | Num _ :: tail -> [Num (Int 0)] @ diff tail  // number ->
         | Var _ :: Mul :: Num n :: tail -> [Num n] @ diff tail
         | Var v :: tail when v<>tv -> [Num (Int 0)] @ diff tail  // number -> 0
-        | Var v :: tail when v=tv -> [Num (Int 1)] @ diff tail  // x^1 -> 1
+        | Var v :: tail when v=tv -> [Num (Int 1)] @ diff tail  // x -> 1
         | _ -> raise ParserError
     diff tList
 
-let diffAndSimplify tList = simplify (differentiate tList)
-let diffToString tList = unlexer (diffAndSimplify tList)
+let diffAndSimplify tList targetVar = simplify (differentiate tList targetVar)
+let diffToString tList targetVar = unlexer (diffAndSimplify tList targetVar)
 
 
 
