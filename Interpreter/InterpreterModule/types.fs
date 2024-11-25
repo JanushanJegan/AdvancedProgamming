@@ -1,7 +1,7 @@
 module InterpreterModule.Types
 
 type Value = | Int of int | Float of float
-and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin | Tan | Exp | Ent | Log | Num of Value | Var of string
+and terminal = Add | Sub | Mul | Div | Pow | Mod | Lbr | Rbr | Eql | Cos | Sin | Tan | Exp | Ent | Log | Comma | Integral | Num of Value | Var of string
 
 exception LexerError of char
 exception ParserError
