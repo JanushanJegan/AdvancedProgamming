@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Cn7+AYgK2VA=",
+  "dgSpecHash": "ca4dWtHWdoc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\GUI\\GUI.csproj",
+  "projectFilePath": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\GUI\\GUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\janus\\.nuget\\packages\\avalonia\\11.1.0\\avalonia.11.1.0.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.22045.20230930\\avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",

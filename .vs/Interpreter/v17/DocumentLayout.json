@@ -1,9 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\",
+  "WorkspaceRootPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}|InterpreterModule\\InterpreterModule.fsproj|c:\\users\\janus\\documents\\other\\uea\\fourth year\\advanced progamming\\cw1 - final version\\interpretermodule\\interpreter.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "AbsoluteMoniker": "D:0:0:{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}|InterpreterModule\\InterpreterModule.fsproj|c:\\users\\janus\\documents\\other\\uea\\computer science\\fourth year\\advanced progamming\\cw1 - complex and rational numbers\\ad - cw1\\interpreter\\interpretermodule\\interpretermodule.fsproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}|InterpreterModule\\InterpreterModule.fsproj|solutionrelative:interpretermodule\\interpretermodule.fsproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}|InterpreterModule\\InterpreterModule.fsproj|c:\\users\\janus\\documents\\other\\uea\\computer science\\fourth year\\advanced progamming\\cw1 - complex and rational numbers\\ad - cw1\\interpreter\\interpretermodule\\interpreter.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
       "RelativeMoniker": "D:0:0:{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}|InterpreterModule\\InterpreterModule.fsproj|solutionrelative:interpretermodule\\interpreter.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
     }
   ],
@@ -24,24 +28,41 @@
         },
         {
           "DockedHeight": 13,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Interpreter.fs",
-              "DocumentMoniker": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\Interpreter.fs",
-              "RelativeDocumentMoniker": "InterpreterModule\\Interpreter.fs",
-              "ToolTip": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\Interpreter.fs",
-              "RelativeToolTip": "InterpreterModule\\Interpreter.fs",
-              "ViewState": "AgIAAIABAAAAAAAAAAAAAJsBAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-25T00:55:01.787Z",
+              "Title": "InterpreterModule",
+              "DocumentMoniker": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\InterpreterModule.fsproj",
+              "RelativeDocumentMoniker": "InterpreterModule\\InterpreterModule.fsproj",
+              "ToolTip": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\InterpreterModule.fsproj",
+              "RelativeToolTip": "InterpreterModule\\InterpreterModule.fsproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001351|",
+              "WhenOpened": "2025-01-10T19:54:25.693Z",
               "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Interpreter.fs",
+              "DocumentMoniker": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\Interpreter.fs",
+              "RelativeDocumentMoniker": "InterpreterModule\\Interpreter.fs",
+              "ToolTip": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\Interpreter.fs",
+              "RelativeToolTip": "InterpreterModule\\Interpreter.fs",
+              "ViewState": "AgIAAKEBAAAAAAAAAAAAAJsBAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-25T00:55:01.787Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\GUI\\GUI.csproj": {}
+    "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\GUI\\GUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\GUI\\GUI.csproj": {
+    "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\GUI\\GUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\GUI\\GUI.csproj",
+        "projectUniqueName": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\GUI\\GUI.csproj",
         "projectName": "GUI",
-        "projectPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\GUI\\GUI.csproj",
+        "projectPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\GUI\\GUI.csproj",
         "packagesPath": "C:\\Users\\janus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\GUI\\obj\\",
+        "outputPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\GUI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Visual Studio (Folder made by me)\\SDK\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\InterpreterModule.fsproj": {
-                "projectPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\InterpreterModule.fsproj"
+              "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\InterpreterModule.fsproj": {
+                "projectPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\InterpreterModule.fsproj"
               }
             }
           }
@@ -98,14 +98,14 @@
         }
       }
     },
-    "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\InterpreterModule.fsproj": {
+    "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\InterpreterModule.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\InterpreterModule.fsproj",
+        "projectUniqueName": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\InterpreterModule.fsproj",
         "projectName": "InterpreterModule",
-        "projectPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\InterpreterModule.fsproj",
+        "projectPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\InterpreterModule.fsproj",
         "packagesPath": "C:\\Users\\janus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\obj\\",
+        "outputPath": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Visual Studio (Folder made by me)\\SDK\\NuGetPackages"

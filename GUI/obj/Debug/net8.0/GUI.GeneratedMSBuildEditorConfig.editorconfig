@@ -15,12 +15,12 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GUI
-build_property.ProjectDir = C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\
+build_property.ProjectDir = C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[C:/Users/janus/Documents/Other/Uea/fourth year/Advanced Progamming/Cw1 - Final Version/GUI/App.axaml]
+[C:/Users/janus/Documents/Other/Uea/Computer Science/fourth year/Advanced Progamming/CW1 - complex and rational numbers/AD - CW1/Interpreter/GUI/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/janus/Documents/Other/Uea/fourth year/Advanced Progamming/Cw1 - Final Version/GUI/Views/MainWindow.axaml]
+[C:/Users/janus/Documents/Other/Uea/Computer Science/fourth year/Advanced Progamming/CW1 - complex and rational numbers/AD - CW1/Interpreter/GUI/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

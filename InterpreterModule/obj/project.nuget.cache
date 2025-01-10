@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JuR3p6LeECA=",
+  "dgSpecHash": "h0MP6X8IBlE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\janus\\Documents\\Other\\Uea\\fourth year\\Advanced Progamming\\Cw1 - Final Version\\InterpreterModule\\InterpreterModule.fsproj",
+  "projectFilePath": "C:\\Users\\janus\\Documents\\Other\\Uea\\Computer Science\\fourth year\\Advanced Progamming\\CW1 - complex and rational numbers\\AD - CW1\\Interpreter\\InterpreterModule\\InterpreterModule.fsproj",
   "expectedPackageFiles": [
     "C:\\Users\\janus\\.nuget\\packages\\fsharp.core\\8.0.401\\fsharp.core.8.0.401.nupkg.sha512"
   ],

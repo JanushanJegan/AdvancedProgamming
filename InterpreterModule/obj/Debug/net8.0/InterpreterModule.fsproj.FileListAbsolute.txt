@@ -114,3 +114,33 @@ C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final V
 C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\InterpreterModule\obj\Debug\net8.0\InterpreterModule.pdb
 C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\InterpreterModule\obj\Debug\net8.0\InterpreterModule.genruntimeconfig.cache
 C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\InterpreterModule\obj\Debug\net8.0\ref\InterpreterModule.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\InterpreterModule.exe
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\InterpreterModule.deps.json
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\InterpreterModule.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\InterpreterModule.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\InterpreterModule.pdb
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\FSharp.Core.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\cs\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\de\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\es\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\fr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\it\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\ja\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\ko\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\pl\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\pt-BR\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\ru\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\tr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\zh-Hans\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\bin\Debug\net8.0\zh-Hant\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\InterpreterModule.fsproj.AssemblyReference.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\InterpreterModule.AssemblyInfoInputs.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\InterpreterModule.AssemblyInfo.fs
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\InterpreterModule.fsproj.CoreCompileInputs.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\InterpreterModule.sourcelink.json
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\Interpre.31D1E3B7.Up2Date
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\InterpreterModule.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\refint\InterpreterModule.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\InterpreterModule.pdb
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\InterpreterModule.genruntimeconfig.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\InterpreterModule\obj\Debug\net8.0\ref\InterpreterModule.dll
