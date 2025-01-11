@@ -1,0 +1,436 @@
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/GUI
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/GUI.deps.json
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/GUI.runtimeconfig.json
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/GUI.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/GUI.pdb
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Base.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Controls.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.DesignerSupport.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Dialogs.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Markup.Xaml.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Markup.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Metal.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.MicroCom.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.OpenGL.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Vulkan.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Controls.ColorPicker.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Controls.DataGrid.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Desktop.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Diagnostics.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Fonts.Inter.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.FreeDesktop.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Native.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Remote.Protocol.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Skia.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Themes.Fluent.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Themes.Simple.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.Win32.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Avalonia.X11.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/CommunityToolkit.Mvvm.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/HarfBuzzSharp.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/MicroCom.Runtime.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/SkiaSharp.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/System.IO.Pipelines.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/Tmds.DBus.Protocol.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-arm64/native/av_libglesv2.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-x64/native/av_libglesv2.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-x86/native/av_libglesv2.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/osx/native/libAvaloniaNative.dylib
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/linux-arm/native/libHarfBuzzSharp.so
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/linux-arm64/native/libHarfBuzzSharp.so
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/linux-musl-x64/native/libHarfBuzzSharp.so
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/linux-x64/native/libHarfBuzzSharp.so
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/osx/native/libHarfBuzzSharp.dylib
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-arm64/native/libHarfBuzzSharp.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-x64/native/libHarfBuzzSharp.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-x86/native/libHarfBuzzSharp.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/linux-arm/native/libSkiaSharp.so
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/linux-arm64/native/libSkiaSharp.so
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/linux-musl-x64/native/libSkiaSharp.so
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/linux-x64/native/libSkiaSharp.so
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/osx/native/libSkiaSharp.dylib
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-arm64/native/libSkiaSharp.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-x64/native/libSkiaSharp.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/runtimes/win-x86/native/libSkiaSharp.dll
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/GUI.csproj.AssemblyReference.cache
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/Avalonia/resources
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/GUI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/GUI.AssemblyInfoInputs.cache
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/GUI.AssemblyInfo.cs
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/GUI.csproj.CoreCompileInputs.cache
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/Avalonia/GUI.dll
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/Avalonia/GUI.pdb
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/refint/Avalonia/GUI.dll
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/GUI.csproj.Up2Date
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/GUI.genruntimeconfig.cache
+/Users/mac/RiderProjects/Interpreter/GUI/obj/Debug/net8.0/ref/GUI.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/InterpreterModule.deps.json
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/InterpreterModule.runtimeconfig.json
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/InterpreterModule
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/FSharp.Core.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/cs/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/de/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/es/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/fr/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/it/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/ja/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/ko/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/pl/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/pt-BR/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/ru/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/tr/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/zh-Hans/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/zh-Hant/FSharp.Core.resources.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/InterpreterModule.dll
+/Users/mac/RiderProjects/Interpreter/GUI/bin/Debug/net8.0/InterpreterModule.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.deps.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.exe
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.exe
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.deps.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Base.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.DesignerSupport.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Dialogs.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Markup.Xaml.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Markup.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Metal.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.MicroCom.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.OpenGL.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Vulkan.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.ColorPicker.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.DataGrid.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Desktop.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Diagnostics.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Fonts.Inter.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.FreeDesktop.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Native.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Remote.Protocol.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Skia.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Themes.Fluent.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Themes.Simple.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Win32.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.X11.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\CommunityToolkit.Mvvm.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\FSharp.Core.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\HarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\MicroCom.Runtime.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\SkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Tmds.DBus.Protocol.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\cs\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\de\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\es\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\fr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\it\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ja\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ko\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\pl\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\pt-BR\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ru\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\tr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\zh-Hans\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\zh-Hant\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libAvaloniaNative.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-x64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-x64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.AssemblyReference.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\resources
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.AssemblyInfoInputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.AssemblyInfo.cs
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.CoreCompileInputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\GUI.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\refint\Avalonia\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.Up2Date
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.genruntimeconfig.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - remake\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\ref\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.deps.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.exe
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.exe
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.deps.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Base.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.DesignerSupport.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Dialogs.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Markup.Xaml.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Markup.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Metal.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.MicroCom.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.OpenGL.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Vulkan.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.ColorPicker.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.DataGrid.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Desktop.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Diagnostics.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Fonts.Inter.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.FreeDesktop.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Native.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Remote.Protocol.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Skia.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Themes.Fluent.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Themes.Simple.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Win32.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.X11.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\CommunityToolkit.Mvvm.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\FSharp.Core.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\HarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\MicroCom.Runtime.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\SkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Tmds.DBus.Protocol.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\cs\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\de\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\es\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\fr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\it\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ja\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ko\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\pl\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\pt-BR\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ru\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\tr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\zh-Hans\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\zh-Hant\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libAvaloniaNative.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-x64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-x64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.AssemblyReference.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\resources
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.AssemblyInfoInputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.AssemblyInfo.cs
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.CoreCompileInputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\GUI.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\refint\Avalonia\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.Up2Date
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.genruntimeconfig.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\ref\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\InterpreterModule.exe
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\InterpreterModule.deps.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\InterpreterModule.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\GUI.exe
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\GUI.deps.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\GUI.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\GUI.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Base.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Controls.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.DesignerSupport.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Dialogs.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Markup.Xaml.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Markup.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Metal.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.MicroCom.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.OpenGL.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Vulkan.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Controls.ColorPicker.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Controls.DataGrid.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Desktop.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Diagnostics.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Fonts.Inter.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.FreeDesktop.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Native.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Remote.Protocol.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Skia.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Themes.Fluent.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Themes.Simple.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.Win32.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Avalonia.X11.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\CommunityToolkit.Mvvm.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\FSharp.Core.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\HarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\MicroCom.Runtime.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\SkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\Tmds.DBus.Protocol.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\cs\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\de\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\es\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\fr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\it\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\ja\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\ko\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\pl\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\pt-BR\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\ru\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\tr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\zh-Hans\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\zh-Hant\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-x64\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-x86\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\osx\native\libAvaloniaNative.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\linux-arm\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\linux-arm64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\linux-x64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\linux-arm\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\linux-arm64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\linux-x64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\InterpreterModule.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\bin\Debug\net8.0\InterpreterModule.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\GUI.csproj.AssemblyReference.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\Avalonia\resources
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\GUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\GUI.AssemblyInfoInputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\GUI.AssemblyInfo.cs
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\GUI.csproj.CoreCompileInputs.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\Avalonia\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\Avalonia\GUI.pdb
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\refint\Avalonia\GUI.dll
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\GUI.csproj.Up2Date
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\GUI.genruntimeconfig.cache
+C:\Users\janus\Documents\Other\Uea\fourth year\Advanced Progamming\Cw1 - Final Version\GUI\obj\Debug\net8.0\ref\GUI.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.deps.json
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.exe
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.exe
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.deps.json
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.runtimeconfig.json
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\GUI.pdb
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Base.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.DesignerSupport.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Dialogs.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Markup.Xaml.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Markup.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Metal.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.MicroCom.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.OpenGL.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Vulkan.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.ColorPicker.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Controls.DataGrid.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Desktop.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Diagnostics.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Fonts.Inter.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.FreeDesktop.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Native.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Remote.Protocol.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Skia.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Themes.Fluent.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Themes.Simple.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.Win32.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Avalonia.X11.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\CommunityToolkit.Mvvm.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\FSharp.Core.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\HarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\MicroCom.Runtime.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\SkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\Tmds.DBus.Protocol.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\cs\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\de\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\es\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\fr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\it\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ja\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ko\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\pl\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\pt-BR\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\ru\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\tr\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\zh-Hans\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\zh-Hant\FSharp.Core.resources.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\av_libglesv2.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libAvaloniaNative.dylib
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-x64\native\libHarfBuzzSharp.so
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-arm64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\linux-x64\native\libSkiaSharp.so
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\bin\Debug\net8.0\InterpreterModule.pdb
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.AssemblyReference.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\resources
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.AssemblyInfoInputs.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.AssemblyInfo.cs
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.CoreCompileInputs.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.sourcelink.json
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\GUI.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\Avalonia\GUI.pdb
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\refint\Avalonia\GUI.dll
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.csproj.Up2Date
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\GUI.genruntimeconfig.cache
+C:\Users\janus\Documents\Other\Uea\Computer Science\fourth year\Advanced Progamming\CW1 - complex and rational numbers\AD - CW1\Interpreter\GUI\obj\Debug\net8.0\ref\GUI.dll
