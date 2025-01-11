@@ -136,18 +136,9 @@ let parser tList =
         | _ -> raise ParserError
     S tList
 
-// S [Add; Num (Int -1); Add; Num (Int 3)]
-// E [Add; Num (Int -1); Add; Num (Int 3)]
-// T [Add; Num (Int -1); Add; Num (Int 3)]
-// F [Add; Num (Int -1); Add; Num (Int 3)]
-// NR [Add; Num (Int -1); Add; Num (Int 3)]
-// FOpt [Num (Int -1); Add; Num (Int 3)]
-// TOpt [Num (Int -1); Add; Num (Int 3)]
-// EOpt [Num (Int -1); Add; Num (Int 3)]
 
 
 let parseAndEval tList =
-    printfn "Evaluating"
     let rec S tList =
         match tList with
         | Var varName :: Eql :: tail ->
@@ -345,6 +336,14 @@ let plot (input:string, minX:string, maxX:string, vM, fM)  =
         match tokenList with
             | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
                 "", [for x in xVals -> (float x, toFloat(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr])))]
+            | Integral :: Lbr :: Var f :: Comma :: Num a :: Comma :: Num b :: Comma :: Num steps :: Rbr :: _ ->
+                let stepCount = int (toFloat steps)
+                let h = (toFloat b - toFloat a) / float stepCount
+                let points =
+                    [for i in 0 .. stepCount ->
+                        let x = toFloat a + float i * h
+                        (x, toFloat(parseAndEval([Var f; Lbr; Num(Float(x)); Rbr])))]
+                "", points
             | _ -> "", []
     with
         | LexerError(c) -> $"Lexer Error, invalid token {c}", []
@@ -396,3 +395,4 @@ let getTangentAtPoint (input: string, xVal: string, vM, fM) =
         | ParserError -> "", "Error parsing"
         | VarUndefined(v) -> "", $"Variable {v} is not defined"
         | :? OverflowException -> "", "Overflow error, exceeded max value for int32"
+

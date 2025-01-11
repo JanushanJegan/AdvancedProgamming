@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Avalonia.Input;
 using Microsoft.FSharp.Collections;
@@ -39,8 +40,12 @@ namespace GUI.Views
             if (points.Length == 0) Output.Text = msg;  // equation is invalid, display error
             else
             {
-                PlotPoints(points, Input.Text);
-                plottedEquations.Insert(0, Input.Text);
+                var isIntegral = Input.Text.Contains("integral(");
+                if (isIntegral) {plottedEquations.Add(Input.Text);}
+                else {plottedEquations.Insert(0, Input.Text);}
+                Console.WriteLine($"Plotting integral: {isIntegral}");
+                PlotPoints(points, Input.Text, isIntegral);
+
                 PlotTangBut.IsEnabled = true;
             }
         }
@@ -58,14 +63,30 @@ namespace GUI.Views
         {
             var (minX, maxX) = (PlotView.Model.Axes[0].ActualMinimum, PlotView.Model.Axes[0].ActualMaximum);
             Console.WriteLine($"AxisUpdate - {minX} - {maxX} - {plottedEquations.Count}");
+            var seriesId = 0;
+            PlotView.Model.Series.ToImmutableList().ForEach(Console.WriteLine);
 
+            Console.WriteLine($"Series: {PlotView.Model.Series.Count}");
+            plottedEquations.ForEach(Console.WriteLine);
+            Console.WriteLine($"pE: {plottedEquations.Count}");
             for (int i = 0; i < plottedEquations.Count; i++)
             {
                 Console.WriteLine($"Plotting {plottedEquations[i]}");
-                var lineSeries = PlotView.Model.Series[i] as LineSeries;
+                var lineSeries = PlotView.Model.Series[seriesId] as LineSeries;
                 lineSeries!.Points.Clear();
                 var points = Interpreter.plot(plottedEquations[i], $"{minX}", $"{maxX}", storedVariables, storedFunctions).Item2;
                 foreach (var p in points) { lineSeries.Points.Add(new DataPoint(p.Item1, p.Item2)); }
+
+                if (plottedEquations[i].Contains("integral("))
+                {
+                    // seriesId++;
+                    var areaSeries = PlotView.Model.Series[seriesId] as AreaSeries;
+                    areaSeries!.Points.Clear();
+                    foreach (var p in points) { areaSeries.Points.Add(new DataPoint(p.Item1, p.Item2)); areaSeries.Points.Add(new DataPoint(p.Item1, 0)); }
+                }
+
+                seriesId++;
+
             }
         }
 
@@ -81,15 +102,32 @@ namespace GUI.Views
             PlotView.InvalidatePlot(false);
         }
 
-        private void PlotPoints(FSharpList<Tuple<double,double>> points, string label)
+        private void PlotPoints(FSharpList<Tuple<double,double>> points, string label, bool isIntegral)
         {
             var (plotModel, lineSeries) = (new PlotModel(), new LineSeries{Title = label});
+            var areaSeries = new AreaSeries {
+                Title = "Trapezoidal Area",
+                Color = OxyColors.Red,
+                //transparent shading
+                Fill = OxyColor.FromAColor(102, OxyColors.Red),
+                StrokeThickness = 1
+            };
             plotModel.Legends.Add(new Legend{LegendPosition = LegendPosition.RightTop});
-            foreach (var p in points) { lineSeries.Points.Add(new DataPoint(p.Item1, p.Item2)); }
+            foreach (var p in points)
+            {
+                lineSeries.Points.Add(new DataPoint(p.Item1, p.Item2));
+                if (isIntegral)
+                {
+                    areaSeries.Points.Add(new DataPoint(p.Item1, p.Item2));
+                    areaSeries.Points.Add(new DataPoint(p.Item1, 0));
+                }
+            }
 
             if (PlotView.Model.Axes.Count == 0) // if its the first plot do initial setup
             {
-                plotModel.Series.Add(lineSeries);
+
+                if (isIntegral) { plotModel.Series.Add(areaSeries); }
+                else {plotModel.Series.Add(lineSeries);}
                 PlotView.Model = plotModel;
                 PlotView.Model.Axes[0].MajorGridlineStyle = LineStyle.Solid;
                 // PlotView.Model.Axes[0].MinorGridlineStyle = LineStyle.Dot;
@@ -98,7 +136,13 @@ namespace GUI.Views
                 PlotView.Model.Axes[0].AxisChanged += OnPlotMove;
                 KeyDown += OnZoomKey;
             }
-            else {PlotView.Model.Series.Add(lineSeries); PlotView.InvalidatePlot(false);}
+            else
+            {
+
+                if (isIntegral) { PlotView.Model.Series.Add(areaSeries); }
+                else {PlotView.Model.Series.Insert(0, lineSeries);}
+                PlotView.InvalidatePlot(true);
+            }
 
 
 
