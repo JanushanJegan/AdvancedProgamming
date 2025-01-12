@@ -355,9 +355,19 @@ let main (input:string, vM, fM)  =
 let plot (input:string, minX:string, maxX:string, vM, fM)  =
     varMap <- vM; funcMap <- fM
     let tokenList = lexer input
-    let minX, maxX = toFloat (snd (lexer minX |> parseAndEval)), toFloat (snd (lexer maxX |> parseAndEval))  // parses minX and maxX as numbers
-    let xVals = [for i in 0 .. 99 -> minX + (float i * (maxX-minX)/99.)] // creates 100 x values to plot over the x range
+    let minX, maxX = toFloat (snd (lexer minX |> parseAndEval)), toFloat (snd (lexer maxX |> parseAndEval))
+    let xVals = [for i in 0 .. 99 -> minX + (float i * (maxX-minX)/99.)]
     match tokenList with
-        | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->  // use parser to evaluate function at points by calling e.g. y(2)
-            ( [for x in xVals -> (float x, toFloat(snd(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr]))))], varMap, funcMap)
+        | Var fn :: Lbr :: Var _ :: Rbr :: Eql :: _ ->
+            let points = [for x in xVals -> (float x, toFloat(snd(parseAndEval([Var fn; Lbr; Num(Float(x)); Rbr]))))]
+            (points, varMap, funcMap)
+        | Integral :: Lbr :: Var f :: Comma :: Num a :: Comma :: Num b :: Comma :: Num steps :: Rbr :: _ ->
+            let stepCount = int (toFloat steps)
+            let h = (toFloat b - toFloat a) / float stepCount
+            let points =
+                [for i in 0 .. stepCount ->
+                    let x = toFloat a + float i * h
+                    (x, toFloat(snd(parseAndEval([Var f; Lbr; Num(Float(x)); Rbr]))))]
+            (points, varMap, funcMap)
         | _ -> ([], varMap, funcMap)
+

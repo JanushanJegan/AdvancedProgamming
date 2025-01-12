@@ -22,8 +22,18 @@ namespace GUI.Views
 
         private void PlotOnClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            try {PlotPoints(Interpreter.plot(Input.Text, MinX.Text, MaxX.Text, storedVariables, storedFunctions).Item1);}
-            catch (Exception error) { Output.Text = $"Error: {error.Message}"; }
+            try
+            {
+                var pointsResult = Interpreter.plot(Input.Text, MinX.Text, MaxX.Text, storedVariables, storedFunctions);
+                var points = pointsResult.Item1;
+                //check input is integral
+                var isIntegral = Input.Text.Contains("integral(");
+                PlotPoints(points, isIntegral);
+            }
+            catch (Exception error)
+            {
+                Output.Text = $"Error: {error.Message}";
+            }
         }
 
         private void OnPlotMove(object? sender, OxyPlot.Axes.AxisChangedEventArgs e)
@@ -50,11 +60,59 @@ namespace GUI.Views
             }
         }
 
-        private void PlotPoints(FSharpList<Tuple<double,double>> points)
+        private void PlotPoints(FSharpList<Tuple<double, double>> points, bool isIntegral = false)
         {
-            var (plotModel, lineSeries) = (new PlotModel(), new LineSeries());
-            foreach (var p in points) { lineSeries.Points.Add(new DataPoint(p.Item1, p.Item2)); }
+            var plotModel = new PlotModel
+            {
+                Title = isIntegral ? "Numerical Integration" : "Function Plot"
+            };
+
+            var lineSeries = new LineSeries
+            {
+                Title = "f(x)",
+                Color = OxyColors.Green
+            };
+
+            var areaSeries = new AreaSeries
+            {
+                Title = "Trapezoidal Area",
+                Color = OxyColors.Red,
+                //transparent shading
+                Fill = OxyColor.FromAColor(102, OxyColors.Red),
+                StrokeThickness = 1
+            };
+
+            foreach (var p in points)
+            {
+                lineSeries.Points.Add(new DataPoint(p.Item1, p.Item2));
+
+                //only shade on integration
+                if (isIntegral)
+                {
+                    areaSeries.Points.Add(new DataPoint(p.Item1, p.Item2));
+                    areaSeries.Points.Add(new DataPoint(p.Item1, 0));
+                }
+            }
+
+            if (isIntegral)
+            {
+                plotModel.Series.Add(areaSeries);
+            }
+
             plotModel.Series.Add(lineSeries);
+
+            plotModel.Axes.Add(new OxyPlot.Axes.LinearAxis
+            {
+                Position = OxyPlot.Axes.AxisPosition.Bottom,
+                Title = "x"
+            });
+
+            plotModel.Axes.Add(new OxyPlot.Axes.LinearAxis
+            {
+                Position = OxyPlot.Axes.AxisPosition.Left,
+                Title = "f(x)"
+            });
+
             PlotView.Model = plotModel;
             PlotView.Model.Axes[0].AxisChanged += OnPlotMove;
             KeyDown += OnZoomKey;
