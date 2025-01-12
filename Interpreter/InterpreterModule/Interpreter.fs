@@ -119,18 +119,28 @@ let parser tList =
         | _ -> tList
     and NR tList =
         match tList with
-        | (Add|Sub) :: tail -> tail // handles repeated signs like 2+-3 or unary signs like -cos
+        | (Add|Sub) :: tail -> NR tail // handles repeated signs like 2+-3 or unary signs like -cos
         | Num _ :: tail -> tail
         | (Cos|Sin|Tan|Exp|Log) :: Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError
         | Var v :: Lbr :: tail -> match E tail with | Rbr :: tail -> (if funcMap.ContainsKey(v) then tail else raise (VarUndefined(v))) | _ -> raise ParserError // function f(x)
         | Var v :: tail -> if varMap.ContainsKey(v) then tail else raise (VarUndefined(v)) // variable x
-        | Lbr :: tail -> match E tail with | Rbr :: tail -> tail | _ -> raise ParserError // bracketed expression
+        | Lbr :: tail -> let x = S tail
+                         match x with | Rbr :: tail -> tail | _ -> raise ParserError // bracketed expression
         | _ -> raise ParserError
     S tList
 
+// S [Add; Num (Int -1); Add; Num (Int 3)]
+// E [Add; Num (Int -1); Add; Num (Int 3)]
+// T [Add; Num (Int -1); Add; Num (Int 3)]
+// F [Add; Num (Int -1); Add; Num (Int 3)]
+// NR [Add; Num (Int -1); Add; Num (Int 3)]
+// FOpt [Num (Int -1); Add; Num (Int 3)]
+// TOpt [Num (Int -1); Add; Num (Int 3)]
+// EOpt [Num (Int -1); Add; Num (Int 3)]
 
 
 let parseAndEval tList =
+    printfn "Evaluating"
     let rec S tList =
         match tList with
         | Var varName :: Eql :: tail ->
@@ -165,7 +175,7 @@ let parseAndEval tList =
         | Pow :: tail -> let tLst, tVal = F tail
                          FOpt (tLst, pow value tVal)
         | Ent :: tail -> let tLst, tVal = F tail  // scientific notation, E equivalent to *10**
-                         FOpt (tLst, mul value (pow (Int 10) tVal))
+                         FOpt (tLst, mul value (pow (Float 10.) tVal))
         | _ -> (tList, value)
     and NR tList =
         match tList with

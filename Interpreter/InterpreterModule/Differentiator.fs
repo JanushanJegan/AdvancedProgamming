@@ -80,7 +80,7 @@ let rec getCurrentLevel tList depth =
     | Lbr :: tail -> Lbr :: getCurrentLevel tail (depth + 1)
     | head :: tail when depth = 1 -> head :: (getCurrentLevel tail 1)
     | _ :: tail -> (getCurrentLevel tail depth)
-// let containsAny elements = function | a::_ when List.contains a elements -> true | _ -> false
+
 let rec simplify terminals =
     let combineLikeTerms tList =
         let rec convert acc tail = // expands each term to form ax^n
@@ -95,7 +95,7 @@ let rec simplify terminals =
         let converted, rest = convert [] tList
         printfn $"Converted: %A{unlexer converted}, The rest: {unlexer rest}"
         let mutable termMap = Map.empty<terminal list, Value>
-        let rec loop tList =  // collects terms in a map
+        let rec loop tList =  // counts number of each coefficient and stores in a map
             match tList with
             | Num n :: Mul :: Var v :: Pow :: Num p :: tail ->
                 let term = [Var v; Pow; Num p]
@@ -112,18 +112,9 @@ let rec simplify terminals =
         , rest)
 
 
-    let endOfTerm = function // checks if tList starts with a */^
+    let endOfTerm = function // checks if tList starts with a * or ^ or /
         | (Mul|Div|Pow) :: _ -> false
         | _ -> true
-    let getNextTerm tList =  // 2*(3x+5)^2 + 8x^3 -> 2*(3x+5)^2
-        let rec loop acc tList depth =
-            match tList with
-            | [] -> (List.rev acc, [])
-            | Add|Sub as o::tail when depth=1 -> (List.rev acc, o::tail)
-            | Rbr :: tail ->  loop (Rbr::acc) tail (depth-1)
-            | Lbr :: tail -> loop (Lbr::acc) tail (depth+1)
-            | head::tail -> loop (head::acc) tail depth
-        loop [] tList 1
 
     let splitTerms lst = // 3x + 5 + x^2 -> [3x], [5], [x^2]
         let rec split acc current depth = function
@@ -152,14 +143,13 @@ let rec simplify terminals =
         | _ -> false
 
     let rec simplifyExpr terminals acc =
-        printfn $"simplifyExpr - %A{terminals} - %A{acc}  | %A{unlexer terminals} - %A{unlexer acc}"
+        // printfn $"simplifyExpr - %A{terminals} - %A{acc}  | %A{unlexer terminals} - %A{unlexer acc}"
 
         match terminals with
-
-        | [] -> printfn $"Done: %A{acc}"; acc
-        | Sub :: Num n :: rest -> simplifyExpr (Add::Num (sub (Int 0) n)::rest) acc
-        | Sub::Lbr::rest -> printfn "Doing -("; simplifyExpr (acc@[Add; Num(Int -1); Mul; Lbr]@rest) []
-        | [ (Add|Sub) ] -> printfn "removing stray tailing +/-"; simplifyExpr [] acc
+        | [] -> acc // finished
+        | Sub :: Num n :: rest -> simplifyExpr (Add::Num (sub (Int 0) n)::rest) acc // Sub; Num n -> Add; Num -n
+        | Sub::Lbr::rest -> simplifyExpr (acc@[Add; Num(Int -1); Mul; Lbr]@rest) []
+        | [ (Add|Sub) ] -> simplifyExpr [] acc
         | Add|Sub as o1 :: (Add|Sub as o2) :: rest  when o1=o2 -> simplifyExpr (Add::rest) acc // ++ -> +  -- -> +
         | Add|Sub as o1 :: (Add|Sub as o2) :: rest  when o1<>o2 -> simplifyExpr (Sub::rest) acc // +- -> -
         | Num (Int 0) :: Add :: rest -> simplifyExpr rest acc // 0 +
@@ -169,7 +159,6 @@ let rec simplify terminals =
         | Num n :: Mul :: a :: Add :: b :: rest when a=b && endOfTerm rest -> simplifyExpr (acc@[Lbr; Num (add n (Int 1)); Mul; a; Rbr]@rest) [] // ax+x = (a+1)x
 
         | Num (Int 1) :: Mul :: rest | Mul :: Num (Int 1) :: rest-> simplifyExpr rest acc // 1*x or x*1 -> x
-        // | Num (Int -1) :: Mul ::
 
         | Num a :: Mul :: Num b :: rest -> simplifyExpr (acc@[Num(mul a b)]@rest) [] // n1*n2
         | Var v1 :: Mul :: Var v2 :: Pow :: Num n :: rest when v1=v2 -> simplifyExpr (acc@[Var v1; Pow; Num (add n (Int 1))]@rest) [] // x*x^n -> x^(n+1)
@@ -186,72 +175,68 @@ let rec simplify terminals =
 
 
         | Num (Int 0) :: (Mul|Div) :: Lbr :: rest -> let a, remaining = getExprFromBrackets rest 1 // 0*()
-                                                     printfn $"Doing 0x() - $%A{unlexer a} | $%A{unlexer remaining}"
+                                                     // printfn $"Doing 0x() - $%A{unlexer a} | $%A{unlexer remaining}"
                                                      simplifyExpr (acc@(Num (Int 0)::remaining)) []
         | Num (Int 0) :: (Mul|Div) :: rest -> let toRemove, remaining = getNextTerm rest
-                                              printfn $"Doing 0x() 2 - $%A{unlexer toRemove} | $%A{unlexer remaining}"
+                                              // printfn $"Doing 0x() 2 - $%A{unlexer toRemove} | $%A{unlexer remaining}"
                                               simplifyExpr (acc@(Num (Int 0)::remaining)) []
         | Mul :: Num (Int 0) :: rest ->
             let leftPart, before = getLastTerm acc
             let rightPart, after = getNextTerm rest
-            printfn $"Removing *0, before: {unlexer before}, leftPart {unlexer leftPart}, rightPart {unlexer rightPart}, after {unlexer after}"
+            // printfn $"Removing *0, before: {unlexer before}, leftPart {unlexer leftPart}, rightPart {unlexer rightPart}, after {unlexer after}"
             simplifyExpr (before@after) []
         | Sin|Cos|Tan|Log|Exp as func :: Lbr :: rest ->
-            printfn "Passing over function brackets"
+            // printfn "Passing over function brackets"
             let inner, remaining = getExprFromBrackets rest 1
             let simplifiedInner = simplify inner  // Keep brackets around function arguments
             simplifyExpr remaining (acc@[func;Lbr]@simplifiedInner@[Rbr])
 
         | Lbr :: rest ->
-            printfn $"Processing %A{unlexer ([Lbr]@rest)}"
+            // printfn $"Processing %A{unlexer ([Lbr]@rest)}"
             let inner, remaining = getExprFromBrackets rest 1
-            printfn $"Inner %A{unlexer inner}, rest %A{unlexer remaining}"
+            // printfn $"Inner %A{unlexer inner}, rest %A{unlexer remaining}"
             let simplifiedInner = simplify inner
             let cond = (containsAny [Add; Sub] simplifiedInner) && (rest.Head <> Lbr || (startsWithAny [Div; Mul; Pow] remaining))
             let cond1 = (List.contains Add simplifiedInner || List.contains Sub simplifiedInner) && (rest.Head <> Lbr || (remaining.Length > 0 && (remaining.Head=Div || remaining.Head=Mul || remaining.Head=Pow)))
-            printfn $"Simplified %A{unlexer inner} -> %A{unlexer simplifiedInner} - %A{unlexer remaining} - {cond} {cond1} - {rest.Head} - %A{acc} - original: %A{unlexer ([Lbr]@rest)}"
+            // printfn $"Simplified %A{unlexer inner} -> %A{unlexer simplifiedInner} - %A{unlexer remaining} - {cond} {cond1} - {rest.Head} - %A{acc} - original: %A{unlexer ([Lbr]@rest)}"
             match simplifiedInner with
-            | _ when ((acc.Length = 0 || (startsWithAny [Add; Sub] (List.rev acc))) && (not (startsWithAny [Div; Mul; Pow] remaining))) -> printfn "Doing this"; simplifyExpr (acc @ simplifiedInner @ remaining) []
+            | _ when ((acc.Length = 0 || (startsWithAny [Add; Sub] (List.rev acc))) && (not (startsWithAny [Div; Mul; Pow] remaining))) -> simplifyExpr (acc @ simplifiedInner @ remaining) []
 
-            | _ when (containsAny [Add; Sub; Div] simplifiedInner) && (rest.Head <> Lbr || (startsWithAny [Div; Mul] remaining) || (startsWithAny [Div; Mul] (List.rev acc))) -> printfn $"Fully simplified, sI: %A{simplifiedInner}, %A{remaining} remaining - %A{unlexer remaining}"; simplifyExpr remaining (acc@[Lbr]@simplifiedInner@[Rbr])
+            | _ when (containsAny [Add; Sub; Div] simplifiedInner) && (rest.Head <> Lbr || (startsWithAny [Div; Mul] remaining) || (startsWithAny [Div; Mul] (List.rev acc))) -> simplifyExpr remaining (acc@[Lbr]@simplifiedInner@[Rbr])
             | _ -> simplifyExpr (acc @ simplifiedInner @ remaining) []
 
 
         | Mul :: b :: rest when ((List.last acc)=Rbr || b=Lbr) -> // expand out bracket * bracket
-            printfn $"Doing Mul rule on %A{unlexer terminals}, before %A{unlexer acc}"
+            // printfn $"Doing Mul rule on %A{unlexer terminals}, before %A{unlexer acc}"
             let (leftExprU, before), (rightExprU, after) = (getLastTerm acc), (getNextTerm (b::rest))
-            printfn $"before: %A{unlexer before}, leftExpr: %A{unlexer leftExprU}, rightExpr: %A{unlexer rightExprU}, after: %A{unlexer after}"
+            // printfn $"before: %A{unlexer before}, leftExpr: %A{unlexer leftExprU}, rightExpr: %A{unlexer rightExprU}, after: %A{unlexer after}"
             let leftExpr = simplify leftExprU
-            printfn $"Simplified leftExpr: %A{leftExpr}"
+            // printfn $"Simplified leftExpr: %A{leftExpr}"
             let rightExpr = simplify rightExprU
-            printfn $"Simplified rightExpr: %A{rightExpr}"
-            printfn $"final before: %A{unlexer before}, leftExpr: %A{unlexer leftExpr}, rightExpr: %A{unlexer rightExpr}, after: %A{unlexer after}"
+            // printfn $"Simplified rightExpr: %A{rightExpr}"
+            // printfn $"final before: %A{unlexer before}, leftExpr: %A{unlexer leftExpr}, rightExpr: %A{unlexer rightExpr}, after: %A{unlexer after}"
             match (leftExpr, rightExpr) with
             // one of the brackets contains multiple terms so needs expanding, and neither brackets are raised to a power
             | _ when (containsAny [Add; Sub] (getCurrentLevel leftExpr 1) || containsAny [Add; Sub] (getCurrentLevel rightExpr 1)) && (match (List.rev leftExpr) with | Num _::Pow::Rbr::_ -> false | _ -> true && match (List.rev rightExpr) with | Num _::Pow::Rbr::_ -> false | _ -> true) && not (containsAny [Div] (leftExpr@rightExpr)) ->
                 let expansion = expandBrackets (splitTerms leftExpr) (splitTerms rightExpr)
-                printfn $"expanded to %A{unlexer expansion}"
-                printfn $"Result: %A{unlexer (before@expansion@after)}"
+                // printfn $"expanded to %A{unlexer expansion}"
+                // printfn $"Result: %A{unlexer (before@expansion@after)}"
                 simplifyExpr (before@Lbr::expansion@Rbr::after) []
-            | _, Lbr::Num n::[ Rbr ] | _, [Num n] -> printfn "Doing something*number"; simplifyExpr (before@[Num n]@[Mul]@leftExpr@after) [] // something like 3x^2 * 3, swap round so numbers can be combined
-            // | _ -> printfn "Doing last one"; simplifyExpr (b::rest) (acc @ [Mul]) // simple term * term, no need to expand
-            // | _ when (before@after).IsEmpty-> printfn "Doing second to last one"; simplifyExpr (b::rest) (acc @ [Mul])
-            | Num a :: Mul :: restL, Num b :: Mul :: restR -> printfn "Doing number*something*number*something"; simplifyExpr (before@Num (mul a b) :: Mul::restL@Mul::restR@after) []
-            // | _ -> printfn "Doing last one"; simplifyExpr (b::rest) (acc @ [Mul])
-            // | _ when containsAny [Div] (getCurrentLevel rightExpr 1) -> printfn "Doing div thing"; simplifyExpr (before@Lbr::leftExpr@Rbr::Mul::Lbr::rightExpr@Rbr::after) []
-            | _ when containsAny [Div] (getCurrentLevel rightExpr 1) -> printfn "Doing div thing"; simplifyExpr after before@Lbr::leftExpr@Rbr::Mul::Lbr::rightExpr@[Rbr]
-            | _ when leftExpr<>leftExprU || rightExpr<>rightExprU-> printfn "Doing second to last one"; simplifyExpr (before@leftExpr@Mul::rightExpr@after) []
-            | _ -> printfn "Doing last one"; simplifyExpr (b::rest) (acc @ [Mul])
+            | _, Lbr::Num n::[ Rbr ] | _, [Num n] -> simplifyExpr (before@[Num n]@[Mul]@leftExpr@after) [] // something like 3x^2 * 3, swap round so numbers can be combined
+            | Num a :: Mul :: restL, Num b :: Mul :: restR -> simplifyExpr (before@Num (mul a b) :: Mul::restL@Mul::restR@after) []
+            | _ when containsAny [Div] (getCurrentLevel rightExpr 1) -> simplifyExpr after before@Lbr::leftExpr@Rbr::Mul::Lbr::rightExpr@[Rbr]
+            | _ when leftExpr<>leftExprU || rightExpr<>rightExprU-> simplifyExpr (before@leftExpr@Mul::rightExpr@after) []
+            | _ -> simplifyExpr (b::rest) (acc @ [Mul])
 
         | a :: Div :: b :: rest when (fst (getNextTerm (b::rest)))=(fst (getLastTerm (acc@[a]))) -> // (3x+5)/(3x+5) -> 1
-            printfn "Cancelling fraction"
+            // printfn "Cancelling fraction"
             let _, start = getLastTerm (acc@[a])
             let _, rest = getNextTerm (b::rest)
             simplifyExpr (start@[Num (Int 1)]@rest) []
         | Pow :: Lbr :: rest ->
 
             let expExpression, rest = getExprFromBrackets rest 1
-            printfn $"Skipping power expression: acc: {unlexer acc}, expExpr: {unlexer expExpression}, rest: {unlexer rest}"
+            // printfn $"Skipping power expression: acc: {unlexer acc}, expExpr: {unlexer expExpression}, rest: {unlexer rest}"
             simplifyExpr rest (acc@Pow::Lbr::expExpression@[Rbr]) // keeps operators attached to brackets
         | Pow|Mul|Div as o :: exp :: rest when acc.Head=Rbr-> simplifyExpr rest (acc@[o; exp]) // keeps operators attached to brackets
 
@@ -260,40 +245,26 @@ let rec simplify terminals =
         | Add :: b :: rest when isPureTerm ((fst (getLastTerm acc))@[Add]) && isPureTerm (b::rest) ->  // combine terms like 3x^2 + 6x^2
             let lastTerm, before = getLastTerm acc
             let full = lastTerm@Add::b::rest
-            printfn $"Combining like terms on {unlexer full}"
+            // printfn $"Combining like terms on {unlexer full}"
             let combinedTerms, rest = combineLikeTerms full
             let combinedTerms = if rest.IsEmpty then combinedTerms[0..combinedTerms.Length-2] else combinedTerms // strip trailing +
-            printfn $"Combined like terms - {unlexer combinedTerms}, rest: {unlexer rest}"
+            // printfn $"Combined like terms - {unlexer combinedTerms}, rest: {unlexer rest}"
             simplifyExpr rest (before@combinedTerms)
 
 
 
-        | head :: tail -> printfn "Moving on"; simplifyExpr tail (acc @ [head])
+        | head :: tail -> simplifyExpr tail (acc @ [head])
 
 
 
     simplifyExpr terminals []
 
-type eqnComponent = Term of terminal list | Sign of terminal
-
-let rec convertToEqn tList =
-    match tList with
-    | [] -> []
-    | (Add|Sub as s)::tail -> Sign s :: convertToEqn tail
-    | tail -> let term, tail = getNextTerm tail
-              Term term :: convertToEqn tail
 
 let differentiate tList tv = // tv target variable to differentiate with respect to
-    // todo: more complicated powers e.g 2^x
     printfn $"Differentiating %A{unlexer tList}"
     let tList = simplify tList
     printfn $"Simplified to %A{unlexer tList}"
 
-    // /// don't do chain rule if bracket is part of * or /, do product rule/quotient rule first instead
-    // let doChainRule tail = let _, remaining = getExprFromBrackets tail 1
-    //                        match remaining with
-    //                         | (Div|Mul) :: _ -> false
-    //                         | _ -> true
     /// don't bother with product rule if number * something
     let doProductRule lst =
         let leftExpr, rightExpr = splitAtOperator Mul lst 0
@@ -309,53 +280,41 @@ let differentiate tList tv = // tv target variable to differentiate with respect
         | [] -> []
         | Add|Sub as op :: tail-> op :: diff tail
 
-        // | Lbr :: tail when doChainRule tail-> // Chain Rule - (f)^n -> (f)^(n-1) * f'
-        //     printfn $"Doing original chain rule on %A{unlexer tList}"
-        //     let innerExpr, remaining = getExprFromBrackets tail 1
-        //     printfn $"innerExpr: %A{innerExpr}, remaining: %A{remaining}"
-        //     match remaining with
-        //     | Pow :: Num p :: tail ->
-        //         let newPow = sub p (Int 1)
-        //         let innerDiff = diff innerExpr
-        //         printfn $"diff innerExpr: %A{innerDiff}"
-        //         printfn $"cr result: %A{Lbr::innerDiff@[Rbr; Mul] @ [Num p; Mul] @ Lbr :: innerExpr @ [Rbr; Pow; Num newPow]}"
-        //         Lbr::innerDiff@[Rbr; Mul] @ [Num p; Mul] @ Lbr :: innerExpr @ [Rbr; Pow; Num newPow] @ diff tail
-        //     | _ -> diff innerExpr
         | _ when List.contains Div (getCurrentLevel tList 1) -> // Quotient Rule - f(x) / g(x) -> (f'(x) * g(x) - f(x) * g'(x)) / g(x)^2
-            printfn $"Doing quotient rule on %A{unlexer tList}"
+            // printfn $"Doing quotient rule on %A{unlexer tList}"
             let leftExpr, rightExpr = splitAtOperator Div tList 0
-            printfn $"leftExpr: %A{unlexer leftExpr}, rightExpr: %A{unlexer rightExpr}"
+            // printfn $"leftExpr: %A{unlexer leftExpr}, rightExpr: %A{unlexer rightExpr}"
             let rightExpr, rest = getNextTerm rightExpr
-            printfn $"rightExpr: %A{rightExpr}, rest: %A{rest}"
+            // printfn $"rightExpr: %A{rightExpr}, rest: %A{rest}"
             let leftExpr, start = getLastTerm leftExpr
             let leftDiff, rightDiff = (diff leftExpr, diff rightExpr)
-            printfn $"diff leftExpr: %A{unlexer leftDiff}, diff rightExpr: %A{unlexer rightDiff}"
+            // printfn $"diff leftExpr: %A{unlexer leftDiff}, diff rightExpr: %A{unlexer rightDiff}"
             let num = [Lbr; Lbr] @ leftDiff @ [Rbr; Mul; Lbr] @ rightExpr @ [Rbr; Rbr; Sub; Lbr; Lbr] @ leftExpr @ [Rbr; Mul; Lbr] @ rightDiff @ [Rbr; Rbr]
             let denom = [Lbr] @ rightExpr @ [Pow; Num (Int 2); Rbr]
-            printfn $"Done Quotient rule - %A{num} / %A{denom} - %A{unlexer num} / %A{unlexer denom}"
+            // printfn $"Done Quotient rule - %A{num} / %A{denom} - %A{unlexer num} / %A{unlexer denom}"
             start @ [Lbr] @ num @ [Rbr; Div] @ denom @ diff rest
         | _ when List.contains Mul (getCurrentLevel tList 1) && doProductRule tList -> // Product Rule - f(x) * g(x) -> f'(x) * g(x) + f(x) * g'(x)
-            printfn $"Doing product rule on %A{unlexer tList}"
+            // printfn $"Doing product rule on %A{unlexer tList}"
             let leftExpr, rightExpr = splitAtOperator Mul tList 0
-            printfn $"leftExpr: %A{leftExpr}, rightExpr: %A{rightExpr}"
+            // printfn $"leftExpr: %A{leftExpr}, rightExpr: %A{rightExpr}"
             let rightExpr, rest = getNextTerm rightExpr
-            printfn $"rightExpr: %A{rightExpr}, rest: %A{rest}"
+            // printfn $"rightExpr: %A{rightExpr}, rest: %A{rest}"
             let leftExpr, start = getLastTerm leftExpr
-            printfn $"leftExpr: %A{leftExpr}, start: %A{start}"
+            // printfn $"leftExpr: %A{leftExpr}, start: %A{start}"
             let leftDiff, rightDiff = (diff leftExpr, diff rightExpr)
-            printfn $"diff leftExpr: %A{leftDiff}, diff rightExpr: %A{rightDiff}"
-            let res = [Lbr] @ leftDiff @ [Rbr; Mul; Lbr] @ rightExpr @ [Rbr; Add; Lbr] @ leftExpr @ [Rbr; Mul; Lbr] @ rightDiff @ [Rbr]
-            printfn $"pr result: %A{ res} <- %A{leftExpr}*%A{rightExpr}  %A{unlexer res}"
+            // printfn $"diff leftExpr: %A{leftDiff}, diff rightExpr: %A{rightDiff}"
+            // let res = [Lbr] @ leftDiff @ [Rbr; Mul; Lbr] @ rightExpr @ [Rbr; Add; Lbr] @ leftExpr @ [Rbr; Mul; Lbr] @ rightDiff @ [Rbr]
+            // printfn $"pr result: %A{ res} <- %A{leftExpr}*%A{rightExpr}  %A{unlexer res}"
             start @ [Lbr; Lbr] @ leftDiff @ [Rbr; Mul; Lbr] @ rightExpr @ [Rbr; Add; Lbr] @ leftExpr @ [Rbr; Mul; Lbr] @ rightDiff @ [Rbr; Rbr] @ diff rest
 
         | _ when List.contains Pow (getCurrentLevel tList 1) -> // Chain Rule - (f)^n -> (f)^(n-1) * f'
-            printfn $"Doing chain rule on %A{unlexer tList}"
+            // printfn $"Doing chain rule on %A{unlexer tList}"
             let leftExpr, rightExpr = splitAtOperator Pow tList 0
-            printfn $"leftExpr: %A{unlexer leftExpr}, rightExpr: %A{unlexer rightExpr}"
+            // printfn $"leftExpr: %A{unlexer leftExpr}, rightExpr: %A{unlexer rightExpr}"
             let rightExpr, rest = getNextTerm rightExpr
-            printfn $"rightExpr: %A{rightExpr}, rest: %A{rest}"
+            // printfn $"rightExpr: %A{rightExpr}, rest: %A{rest}"
             let leftExpr, start = getLastTerm leftExpr
-            printfn $"leftExpr: %A{leftExpr}, start: %A{start}"
+            // printfn $"leftExpr: %A{leftExpr}, start: %A{start}"
             // let innerExpr, remaining = getExprFromBrackets tail 1
             // printfn $"innerExpr: %A{innerExpr}, remaining: %A{remaining}"
             // let p = match rightExpr with | [Num p] -> p | _ -> raise ParserError // only simple powers for now
@@ -363,7 +322,7 @@ let differentiate tList tv = // tv target variable to differentiate with respect
             // let expExpression = match rightExpr with | Lbr :: tail -> fst (getExprFromBrackets tail 1) | _ -> rightExpr
             let start, baseExpr = match (List.rev leftExpr) with
                                   | Rbr::tail -> let baseExpr, tail = getExprFromBrackets tail 1
-                                                 printfn $"baseExr: %A{unlexer baseExpr}, tail: %A{unlexer tail}"
+                                                 // printfn $"baseExr: %A{unlexer baseExpr}, tail: %A{unlexer tail}"
                                                  start @ (List.rev tail), (List.rev baseExpr)@[Rbr]
 
                                   | a::tail -> start @ (List.rev tail), [a]
@@ -374,36 +333,27 @@ let differentiate tList tv = // tv target variable to differentiate with respect
                                        | a::tail -> rest @ tail, [a]
 
             // let expExpression = rightExpr
-            printfn $"start: %A{unlexer start}, baseExpr: %A{unlexer baseExpr}, expExpression: %A{unlexer expExpression}, end: %A{unlexer rest}"
+            // printfn $"start: %A{unlexer start}, baseExpr: %A{unlexer baseExpr}, expExpression: %A{unlexer expExpression}, end: %A{unlexer rest}"
             match expExpression with  // the thing in the power
             | [Num p] -> let newPow = sub p (Int 1)
-                         printfn "Doing simple power chain rule"
+                         // printfn "Doing simple power chain rule"
                          let innerDiff = diff baseExpr
-                         printfn $"diff innerExpr: %A{innerDiff}"
-                         printfn $"cr result: %A{Lbr::innerDiff@[Rbr; Mul] @ [Num p; Mul] @ Lbr :: baseExpr @ [Rbr; Pow; Num newPow]}"
+                         // printfn $"diff innerExpr: %A{innerDiff}"
+                         // printfn $"cr result: %A{Lbr::innerDiff@[Rbr; Mul] @ [Num p; Mul] @ Lbr :: baseExpr @ [Rbr; Pow; Num newPow]}"
                          start @ Lbr::innerDiff@[Rbr; Mul] @ [Num p; Mul] @ baseExpr @ [Pow; Num newPow] @ diff rest
             | _ -> // f(x) ^ g(x) -> (f(x) ^ g(x)) * (g(x)*ln(f(x)))'
-                printfn $"Doing complicated power chain rule, base: %A{baseExpr}, exponent: %A{expExpression}"
+                // printfn $"Doing complicated power chain rule, base: %A{baseExpr}, exponent: %A{expExpression}"
                 let toDiff = Lbr::expExpression@Rbr::Mul::Log::Lbr::baseExpr@[Rbr]
                 let differentiated = diff toDiff
                 let result = baseExpr@Pow::Lbr::expExpression@Rbr::Mul::differentiated
-                printfn $"finished complicated power chain rule: %A{result} - {unlexer result}"
+                // printfn $"finished complicated power chain rule: %A{result} - {unlexer result}"
                 start @ result @ diff rest
-
-            // match remaining with
-            // | Pow :: Num p :: tail ->
-            //     let newPow = sub p (Int 1)
-            //     let innerDiff = diff innerExpr
-            //     printfn $"diff innerExpr: %A{innerDiff}"
-            //     printfn $"cr result: %A{Lbr::innerDiff@[Rbr; Mul] @ [Num p; Mul] @ Lbr :: innerExpr @ [Rbr; Pow; Num newPow]}"
-            //     Lbr::innerDiff@[Rbr; Mul] @ [Num p; Mul] @ Lbr :: innerExpr @ [Rbr; Pow; Num newPow] @ diff tail
-            // | _ -> diff innerExpr
 
 
         | Sin|Cos|Tan|Exp|Log as f :: Lbr :: tail -> // built in functions
-            printfn $"Doing {f} - %A{tail}"
+            // printfn $"Doing {f} - %A{tail}"
             let innerExpr, remaining = getExprFromBrackets tail 1
-            printfn $"innerExpr: %A{innerExpr}, remaining: %A{remaining}"
+            // printfn $"innerExpr: %A{innerExpr}, remaining: %A{remaining}"
             let innerDiff = diff innerExpr
             let funcDiff = match f with
                            | Sin -> [Mul; Cos; Lbr] @ innerExpr @ [Rbr] // x' * cos(x)
@@ -411,10 +361,10 @@ let differentiate tList tv = // tv target variable to differentiate with respect
                            | Exp -> [Mul; Exp; Lbr] @ innerExpr @ [Rbr] // x' * exp(x)
                            | Tan ->  Div :: Cos :: Lbr :: innerExpr @ [Rbr; Pow; Num (Int 2)] // x' * sec^2(x) or 1/cos^2
                            | Log ->  Div :: Lbr :: innerExpr @ [Rbr] // x'/x
-            printfn $"Diff {f}: %A{funcDiff @ innerExpr @ [Rbr; Mul] @ Lbr::innerDiff@[Rbr]}"
+            // printfn $"Diff {f}: %A{funcDiff @ innerExpr @ [Rbr; Mul] @ Lbr::innerDiff@[Rbr]}"
             [Lbr] @ innerDiff@[Rbr] @ funcDiff @  diff remaining // x'
         | Var v :: Pow :: Num n :: tail when v=tv -> // Power Rule - x^n -> n * x^(n-1)
-            printfn "Doing power rule 2"
+            // printfn "Doing power rule 2"
             [Num n; Mul; Var v; Pow; Num (sub n (Int 1) ) ] @ diff tail
         | Num n :: Mul :: tail -> Num n :: Mul :: diff tail
         | Num _ :: tail -> [Num (Int 0)] @ diff tail  // number ->
@@ -423,7 +373,7 @@ let differentiate tList tv = // tv target variable to differentiate with respect
         | Var v :: tail when v=tv -> [Num (Int 1)] @ diff tail  // x -> 1
         | Lbr :: tail ->
             let expr, rest = getExprFromBrackets tail 1
-            printfn $"Opening brackets on (${unlexer tail} -> Expr: {unlexer expr}, Rest: {unlexer rest}"
+            // printfn $"Opening brackets on (${unlexer tail} -> Expr: {unlexer expr}, Rest: {unlexer rest}"
             diff (expr @ rest)
 
         | _ -> raise ParserError
