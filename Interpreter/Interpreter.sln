@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{C
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "InterpreterModule", "InterpreterModule\InterpreterModule.fsproj", "{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ArithmeticTests", "ArithmeticTests\ArithmeticTests.fsproj", "{A56DEDBE-656F-45CF-A266-71DD040E7B50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FE3A400-9CD3-48C2-8D04-69378A03ED9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A56DEDBE-656F-45CF-A266-71DD040E7B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A56DEDBE-656F-45CF-A266-71DD040E7B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A56DEDBE-656F-45CF-A266-71DD040E7B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A56DEDBE-656F-45CF-A266-71DD040E7B50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
