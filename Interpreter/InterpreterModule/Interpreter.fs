@@ -16,7 +16,7 @@ let intVal c = int(Char.GetNumericValue c)
 
 let rec scanInt(input, n) =
     match input with
-    | '-'::c::tail when isDigit c -> scanInt(tail, 10*n-(intVal c))
+    | '-'::c::tail when isDigit c && n=0 -> scanInt(tail, 10*n-(intVal c))
     | c::tail when isDigit c -> scanInt(tail, 10*n+(intVal c))
     | _ -> (input, n)
 and scanFloat(input, decimal, pos) =
@@ -67,10 +67,14 @@ let lexer input =
         | '%' :: tail -> Mod :: scan tail Mod
         | '(' :: tail ->
             // Handle single-bracket complex numbers
+            printfn "Doing ("
             let remInput, realPart = scanInt(tail, 0)
+            printfn $"remInput: %A{remInput}, imagPart: %A{realPart}"
             match remInput with
             | '-' :: imagHead :: remTail when isDigit imagHead && currentMode=Mode.Complex ->
+                printfn "Doing -"
                 let remInput2, imagPart = scanInt(imagHead :: remTail, 0)
+                printfn $"remInput: %A{remInput2}, imagPart: %A{imagPart}"
                 if List.head remInput2 = 'i' && List.head (List.tail remInput2) = ')' then
                     Num(Value.Complex(float realPart, -float imagPart)) :: scan (List.tail (List.tail remInput2)) lastToken
                 else raise (LexerError (List.head remInput2))
@@ -95,6 +99,26 @@ let lexer input =
         | c :: tail when isLetter c ->
             let remInput, varName = scanStr(tail, string c)
             Var varName :: scan remInput (Var varName)
+        // | c :: tail when isDigit c ->
+        //     let remInput, n = scanInt(tail, intVal c)
+        //     match remInput with
+        //     | '-' :: imagHead :: remTail when isDigit imagHead ->
+        //         // Handle complex numbers with negative imaginary parts
+        //         let remInput2, imag = scanInt(imagHead :: remTail, 0)
+        //         if List.head remInput2 = 'i' then
+        //             Num(Value.Complex(float n, -float imag)) :: scan (List.tail remInput2) lastToken
+        //         else
+        //             raise (LexerError (List.head remInput2))
+        //     | '+' :: imagHead :: remTail when isDigit imagHead ->
+        //         // Handle complex numbers with positive imaginary parts
+        //         let remInput2, imag = scanInt(imagHead :: remTail, 0)
+        //         if List.head remInput2 = 'i' then
+        //             Num(Value.Complex(float n, float imag)) :: scan (List.tail remInput2) lastToken
+        //         else
+        //             raise (LexerError (List.head remInput2))
+        //     | 'i' :: rest -> Num(Value.Complex(float n, 1.0)) :: scan rest lastToken
+        //     | _ -> Num(Int n) :: scan remInput (Num(Int n))  // Default to integer
+        // |  -> raise (LexerError (List.head input))  // Invalid token
         | c :: tail when isDigit c -> let n, remInput = lexNumber c tail
                                       match remInput with | a::_ when (isLetter a && a<>'E') -> Num n :: Mul :: scan remInput Mul | _ -> Num n :: scan remInput (Num n) // allows implicit multiplication of variables
         | _ -> printfn $"Remaining tokens: %A{input}"; raise (LexerError(List.head input))
