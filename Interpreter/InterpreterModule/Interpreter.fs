@@ -16,6 +16,7 @@ let intVal c = int(Char.GetNumericValue c)
 
 let rec scanInt(input, n) =
     match input with
+    | '-'::c::tail when isDigit c -> scanInt(tail, 10*n-(intVal c))
     | c::tail when isDigit c -> scanInt(tail, 10*n+(intVal c))
     | _ -> (input, n)
 and scanFloat(input, decimal, pos) =
@@ -68,12 +69,12 @@ let lexer input =
             // Handle single-bracket complex numbers
             let remInput, realPart = scanInt(tail, 0)
             match remInput with
-            | '-' :: imagHead :: remTail when isDigit imagHead ->
+            | '-' :: imagHead :: remTail when isDigit imagHead && currentMode=Mode.Complex ->
                 let remInput2, imagPart = scanInt(imagHead :: remTail, 0)
                 if List.head remInput2 = 'i' && List.head (List.tail remInput2) = ')' then
                     Num(Value.Complex(float realPart, -float imagPart)) :: scan (List.tail (List.tail remInput2)) lastToken
                 else raise (LexerError (List.head remInput2))
-            | '+' :: imagHead :: remTail when isDigit imagHead ->
+            | '+' :: imagHead :: remTail when isDigit imagHead && currentMode=Mode.Complex ->
                 let remInput2, imagPart = scanInt(imagHead :: remTail, 0)
                 if List.head remInput2 = 'i' && List.head (List.tail remInput2) = ')' then
                     Num(Value.Complex(float realPart, float imagPart)) :: scan (List.tail (List.tail remInput2)) lastToken
@@ -96,7 +97,7 @@ let lexer input =
             Var varName :: scan remInput (Var varName)
         | c :: tail when isDigit c -> let n, remInput = lexNumber c tail
                                       match remInput with | a::_ when (isLetter a && a<>'E') -> Num n :: Mul :: scan remInput Mul | _ -> Num n :: scan remInput (Num n) // allows implicit multiplication of variables
-        | _ -> raise (LexerError(List.head input))
+        | _ -> printfn $"Remaining tokens: %A{input}"; raise (LexerError(List.head input))
     scan (strToList input) (Var "")  // Start with Var "" as the initial lastToken
 
 // Grammar in BNF:
@@ -155,7 +156,6 @@ let parser tList =
 
 
 let parseAndEval tList =
-    printfn "Evaluating"
     let rec S tList =
         match tList with
         | Var varName :: Eql :: tail ->
