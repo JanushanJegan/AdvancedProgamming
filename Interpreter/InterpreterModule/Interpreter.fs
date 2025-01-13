@@ -52,36 +52,52 @@ let lexNumber c tail =
 
 
 let lexer input =
-    let rec scan input =
+    let rec scan input lastToken =
         match input with
-        | [] -> []
+        | [] -> []  // End of input
         | '-'::c :: tail when isDigit c -> let n, remInput = lexNumber c tail // keep - attached to numbers, helps with algebraic manipulation later on
                                            let n = Num (sub (Int 0) n)
-                                           match remInput with | a::_ when (isLetter a && a<>'E') -> Add :: n :: Mul :: scan remInput | _ -> Add :: n :: scan remInput // allows implicit multiplication of variables
-        | '+'::tail -> Add :: scan tail
-        | '-'::tail -> Sub :: scan tail
-        | '*'::'*'::tail | '^'::tail -> Pow :: scan tail
-        | 'E'::tail -> Ent :: scan tail
-        | '*'::tail -> Mul :: scan tail
-        | '/'::tail -> Div :: scan tail
-        | '%'::tail -> Mod :: scan tail
-        | '('::tail -> Lbr :: scan tail
-        | ')'::tail -> Rbr :: scan tail
-        | '='::tail -> Eql :: scan tail
-        | ','::tail -> Comma :: scan tail
-        | _ when startsWith "cos" input -> Cos :: scan (drop 3 input)
-        | _ when startsWith "sin" input -> Sin :: scan (drop 3 input)
-        | _ when startsWith "tan" input -> Tan :: scan (drop 3 input)
-        | _ when startsWith "exp" input -> Exp :: scan (drop 3 input)
-        | _ when startsWith "log" input -> Log :: scan (drop 3 input)
-        | _ when startsWith "integral" input -> Integral :: scan (drop 8 input)
-        | c :: tail when isBlank c -> scan tail
-        | c :: tail when isLetter c -> let remInput, varName = scanStr(tail, string c)
-                                       Var varName :: scan remInput
+                                           match remInput with | a::_ when (isLetter a && a<>'E') -> Add :: n :: Mul :: scan remInput Mul | _ -> Add :: n :: scan remInput n // allows implicit multiplication of variables
+        | '+' :: tail -> Add :: scan tail Add
+        | '-' :: tail -> Sub :: scan tail Sub
+        | '*' :: '*' :: tail | '^' :: tail -> Pow :: scan tail Pow
+        | '*' :: tail -> Mul :: scan tail Mul
+        | '/' :: tail -> Div :: scan tail Div
+        | '%' :: tail -> Mod :: scan tail Mod
+        | '(' :: tail ->
+            // Handle single-bracket complex numbers
+            let remInput, realPart = scanInt(tail, 0)
+            match remInput with
+            | '-' :: imagHead :: remTail when isDigit imagHead ->
+                let remInput2, imagPart = scanInt(imagHead :: remTail, 0)
+                if List.head remInput2 = 'i' && List.head (List.tail remInput2) = ')' then
+                    Num(Value.Complex(float realPart, -float imagPart)) :: scan (List.tail (List.tail remInput2)) lastToken
+                else raise (LexerError (List.head remInput2))
+            | '+' :: imagHead :: remTail when isDigit imagHead ->
+                let remInput2, imagPart = scanInt(imagHead :: remTail, 0)
+                if List.head remInput2 = 'i' && List.head (List.tail remInput2) = ')' then
+                    Num(Value.Complex(float realPart, float imagPart)) :: scan (List.tail (List.tail remInput2)) lastToken
+                else raise (LexerError (List.head remInput2))
+            | _ ->
+                // Not a complex number, assume it is a normal expression
+                Lbr :: scan tail Lbr
+        | ')' :: tail -> Rbr :: scan tail Rbr
+        | '=' :: tail -> Eql :: scan tail Eql
+        | ',' :: tail -> Comma :: scan tail Comma
+        | _ when startsWith "cos" input -> Cos :: scan (drop 3 input) Cos
+        | _ when startsWith "sin" input -> Sin :: scan (drop 3 input) Sin
+        | _ when startsWith "tan" input -> Tan :: scan (drop 3 input) Tan
+        | _ when startsWith "exp" input -> Exp :: scan (drop 3 input) Exp
+        | _ when startsWith "log" input -> Log :: scan (drop 3 input) Log
+        | _ when startsWith "integral" input -> Integral :: scan (drop 8 input) Integral
+        | c :: tail when isBlank c -> scan tail lastToken  // Skip whitespace
+        | c :: tail when isLetter c ->
+            let remInput, varName = scanStr(tail, string c)
+            Var varName :: scan remInput (Var varName)
         | c :: tail when isDigit c -> let n, remInput = lexNumber c tail
-                                      match remInput with | a::_ when (isLetter a && a<>'E') -> Num n :: Mul :: scan remInput | _ -> Num n :: scan remInput // allows implicit multiplication of variables
+                                      match remInput with | a::_ when (isLetter a && a<>'E') -> Num n :: Mul :: scan remInput Mul | _ -> Num n :: scan remInput (Num n) // allows implicit multiplication of variables
         | _ -> raise (LexerError(List.head input))
-    scan (strToList input)
+    scan (strToList input) (Var "")  // Start with Var "" as the initial lastToken
 
 // Grammar in BNF:
 // <S>        ::= <Var> "=" <E> | <Var> "(" <Var> ")" "=" <E> | <E>
@@ -92,6 +108,7 @@ let lexer input =
 // <F>        ::== <NR> <FOpt>
 // <FOpt>     ::= "^"|"**" <F> <FOpt> | <empty>
 // <NR>       ::= "+" <NR> | "-" <NR> | <Num> | <Var> | <Var> "(" <E> ")" | <Cos|Sin|Tan|Exp|Log> "(" <E> ")" | "(" <E> ")"
+
 
 let parser tList =
     let rec S tList =
@@ -137,8 +154,8 @@ let parser tList =
     S tList
 
 
-
 let parseAndEval tList =
+    printfn "Evaluating"
     let rec S tList =
         match tList with
         | Var varName :: Eql :: tail ->
@@ -312,8 +329,9 @@ let rec printTokenList (lst:list<terminal>) : list<string> =
     match lst with
     | head::tail -> printf $"{head.ToString()} "; printTokenList tail
     | [] -> printfn "EOL"; []
-let main (input:string, vM, fM)  =
+let main (input:string, vM, fM, mode)  =
     varMap <- vM; funcMap <- fM
+    currentMode <- mode
     try
         let tokenList = lexer input
         printTokenList tokenList |> ignore

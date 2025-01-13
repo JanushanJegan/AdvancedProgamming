@@ -17,14 +17,40 @@ namespace GUI.Views
         private FSharpMap<string, Types.Value> storedVariables = MapModule.Empty<string, Types.Value>();
         private FSharpMap<string, Tuple<string, FSharpList<Types.terminal>>> storedFunctions = MapModule.Empty<string, Tuple<string, FSharpList<Types.terminal>>>();
         private List<string> plottedEquations = new();
+        private Types.Mode mode = Types.Mode.Reset;
 
-        public MainWindow() { InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
             PlotView.Model = new PlotModel();
+        }
+
+        // Event handler for Rational Mode
+        private void RationalModeButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            Output.Text = "Rational Mode activated!";
+            mode = Types.Mode.Rational;
+            // Additional logic for enabling Rational Mode
+        }
+
+        // Event handler for Complex Mode
+        private void ComplexModeButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            Output.Text = "Complex Mode activated!";
+            mode = Types.Mode.Complex;
+            // Additional logic for enabling Complex Mode
+        }
+
+        // Event handler for Reset Mode
+        private void ResetModeButton_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            Output.Text = "Reset Mode activated!";
+            mode = Types.Mode.Reset;
         }
 
         private void CalculateOnClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            try { (Output.Text, storedVariables, storedFunctions) = Interpreter.main(Input.Text, storedVariables, storedFunctions); }
+            try { (Output.Text, storedVariables, storedFunctions) = Interpreter.main(Input.Text, storedVariables, storedFunctions, mode); }
             catch (Exception error) { Output.Text = $"Error: {error.Message}"; }
         }
 
@@ -53,11 +79,16 @@ namespace GUI.Views
         private void DifferentiateOnClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
 
-            try { (Output.Text, storedVariables, storedFunctions) = Interpreter.differentiate(Input.Text, storedVariables, storedFunctions); }
-            catch (Exception error) { Output.Text = $"Error: {error.Message}"; }
-
+            try
+            {
+                (Output.Text, storedVariables, storedFunctions) =
+                    Interpreter.differentiate(Input.Text, storedVariables, storedFunctions);
+            }
+            catch (Exception error)
+            {
+                Output.Text = $"Error: {error.Message}";
+            }
         }
-
 
         private void OnPlotMove(object? sender, OxyPlot.Axes.AxisChangedEventArgs e)
         {
